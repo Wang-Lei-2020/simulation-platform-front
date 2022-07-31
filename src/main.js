@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-////////////////////////////////hjhtest
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from "@/router";
@@ -9,6 +8,11 @@ import VueSession from 'vue-session'
 import store from './store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import { Table, TableColumn, Pagination } from 'element-ui'
+
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Pagination)
 
 Vue.use(ElementUI);
 Vue.use(VueSession);
@@ -16,7 +20,6 @@ Vue.use(VueAxios, axios);
 // Vue.use(router)
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8081'
-// axios.defaults.baseURL = 'http://127.0.0.1:8081'
 Vue.prototype.$axios = axios
 ///////////////////////////////
 

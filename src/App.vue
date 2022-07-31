@@ -1,35 +1,87 @@
 <template>
   <div id="app">
+    <div v-if="photoFlag">
+      <el-dialog
+          title="修改头像"
+          :visible.sync="photoFlag"
+          width="40%">
+        <ChangePhoto></ChangePhoto>
+      </el-dialog>
+    </div>
+
     <el-container>
       <el-header class="header">
-        <!--                <button v-on:click="testsession">测试session</button>-->
         <el-menu
             :default-active="activeIndex"
             mode="horizontal"
-            background-color="#545c64"
+            background-color="#2F4F4F"
             text-color="#fff"
             active-text-color="#ffd04b">
-          <el-menu-item index="1" style="margin-left: 4%" v-on:click="toHome">
-            <img style="height: 56px;margin-right: 8%" src="./assets/logo.png" alt="logo">无用书城
+          <el-menu-item index="1" style="margin-left: 4%">
+            <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo">川藏铁路虚拟仿真教学系统
           </el-menu-item>
-          <el-menu-item index="2" style="margin-left: 4%" v-on:click="toHome">主页</el-menu-item>
-          <el-submenu index="3" style="float: right;padding-right: 4%">
+          <el-submenu index="2" style="float: right;padding-right: 4%">
             <template slot="title">
-              <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+              <el-avatar :src="getPhotoUrl"></el-avatar>
               {{getUsername}}
             </template>
-            <el-menu-item index="3-1" v-if="!getLoginState"  v-on:click="toLogin">登录</el-menu-item>
-            <el-menu-item index="3-2" v-if="getLoginState"  v-on:click="onLogout">登出</el-menu-item>
-            <el-menu-item index="3-3" v-on:click="toRegister">注册</el-menu-item>
+            <el-menu-item index="3-1" v-if="getLoginState" v-on:click="ChangePhoto">修改头像</el-menu-item>
+            <el-menu-item index="3-2" v-if="!getLoginState"  v-on:click="toLogin">登录</el-menu-item>
+            <el-menu-item index="3-3" v-if="getLoginState"  v-on:click="onLogout">注销</el-menu-item>
+            <el-menu-item index="3-4" v-if="!getLoginState" v-on:click="toRegister">注册</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-header>
-      <el-main class="main">
-        <router-view></router-view>
-      </el-main>
+
+        <el-main v-if="getLoginState" class="main">
+          <el-col span="4">
+            <el-row class="tac">
+              <el-menu
+                  default-active="2"
+                  class="el-menu-vertical-demo"
+                  @open="handleOpen"
+                  @close="handleClose"
+              >
+                <el-submenu index="4">
+                  <template slot="title">
+                    <i class="el-icon-s-tools"></i>
+                    <span>系统设置</span>
+                  </template>
+                  <el-menu-item class="submenu" index="4-1" @click="toUserList()">  系统用户</el-menu-item>
+                  <el-menu-item class="submenu" index="4-2" @click="toUserInfo()">  个人信息</el-menu-item>
+                </el-submenu>
+                <el-submenu index="5">
+                  <template slot="title">
+                    <i class="el-icon-s-custom"></i>
+                    <span>虚拟仿真实验</span>
+                  </template>
+                  <el-menu-item class="submenu" index="5-1" @click="toSceneView()">全景浏览</el-menu-item>
+                  <el-menu-item class="submenu" index="5-2" @click="toExperiment()">传感器安放</el-menu-item>
+                </el-submenu>
+
+                <el-submenu index="6">
+                  <template slot="title">
+                    <i class="el-icon-s-data"></i>
+                    <span>教学管理</span>
+                  </template>
+                  <el-menu-item class="submenu" index="6-1" @click="toDataManagement()">实验教学</el-menu-item>
+                  <el-menu-item class="submenu" index="6-2" @click="toDataManagement()">实验考核</el-menu-item>
+                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验成绩</el-menu-item>
+                </el-submenu>
+              </el-menu>
+            </el-row>
+          </el-col>
+          <el-col v-if="getLoginState" span="20">
+            <router-view></router-view>
+          </el-col>
+        </el-main>
+        <el-main v-if="!getLoginState" class="main">
+          <router-view></router-view>
+        </el-main>
+
       <el-footer class="footer">
         <el-backtop></el-backtop>
-        <div style="text-align: center;color:#5a5959;margin-top: 35px">版权所有© 胡江浩、陈庆洋、宋廷泽</div>
+        <div style="text-align: center;color:#5a5959;margin-top: 35px">版权所有© WangLei</div>
       </el-footer>
     </el-container>
   </div>
@@ -37,45 +89,43 @@
 
 
 <script>
+import ChangePhoto from "@/components/ChangePhoto";
+
 export default {
   name: "App",
+  components:{ChangePhoto},
   data() {
     return {
       activeIndex: "1",
+      photoFlag:false,
     }
   },
   computed: {
     // 计算属性的 getter
     getUsername: function () {
-      // `this` 指向 vm 实例
-      if(localStorage.getItem('username') == null){
+      if(localStorage.getItem('userName') == null){
         return "未登录";
       }else{
-        return localStorage.getItem('username');
+        return localStorage.getItem('userName');
       }
     },
     getLoginState: function (){
-      if(localStorage.getItem('username') == null){
+      if(localStorage.getItem('userName') == null){
         return false;
       }else{
         return true;
       }
+    },
+    getPhotoUrl: function(){
+      if(localStorage.getItem('logoImage') != "null") {
+        return localStorage.getItem('logoImage');
+      }
+      else{
+        return "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      }
     }
   },
   methods: {
-    testsession: function () {
-      this.axios.get('/login/test').then((response) => {
-        this.msg = response.data;
-      }).catch((response) => {
-        console.log(response);
-      })
-    },
-    toHome: function () {
-      console.log(this.$route.path);
-      if (this.$route.path !== "/home") {
-        this.$router.push("/home");
-      }
-    },
     toLogin: function () {
       console.log(this.$route.path);
       if (this.$route.path !== "/login") {
@@ -83,9 +133,6 @@ export default {
       }
     },
     onLogout: function () {
-      // if (this.$route.path !== "/login") {
-      //   this.$router.push({name:"Login",params:{isReload: 'true'}});
-      // }
       const _this = this;
       this.$axios.post('/user/logout',{},{
         headers: {
@@ -109,10 +156,9 @@ export default {
               message: '登出成功！',
               type: 'success'
             });
-            _this.$router.go(0);
+            _this.$router.push({name:"Login",params:{isReload: 'true',msg: '登出成功！'}});
           }
         }
-
       }).catch(function (response) {
         // 这里是处理错误的回调
         console.log(response)
@@ -127,7 +173,35 @@ export default {
         this.$router.push({name:"Register",params:{isReload: 'true'}});
       }
     },
-
+    ChangePhoto: function(){
+      this.photoFlag = true;
+    },
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    toUserList: function(){
+      if (this.$route.path !== "/userList") {
+        this.$router.push({name:"UserList",params:{isReload: 'true'}});
+      }
+    },
+    toUserInfo: function(){
+      if (this.$route.path !== "/userInfo") {
+        this.$router.push({name:"UserInfo",params:{isReload: 'true'}});
+      }
+    },
+    toSceneView: function () {
+      if (this.$route.path !== "/sceneView") {
+        this.$router.push({name:"SceneView",params:{isReload: 'true'}});
+      }
+    },
+    toExperiment: function () {
+      if (this.$route.path !== "/experiment") {
+        this.$router.push({name:"Experiment",params:{isReload: 'true'}});
+      }
+    }
   }
 }
 </script>

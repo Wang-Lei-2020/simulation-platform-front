@@ -2,29 +2,27 @@
   <div>
     <div class="login_form">
       <el-container>
-        <el-aside width="60%" style="min-height: 854px;position: relative">
-          <img src="../assets/loginBackground.png" alt="loginBackground" width="100%"
-               style="position: absolute;margin-top: -175px;top: 50%">
-        </el-aside>
+        <el-aside width="30%"></el-aside>
         <el-main class="login-main"
-                 style="margin:auto 10% ;width: 20%;height: 80%;vertical-align: center">
+                 style="margin-top:100px;width: 200%;height: 80%;vertical-align: center">
           <h1 style="color: #409EFF;text-align: center">登录</h1>
-          <el-form ref="loginForm" :model="loginForm" label-width="20%">
-            <el-form-item label="邮箱" required>
-              <el-input v-model="loginForm.email" type="email" autocomplete="off" placeholder="请输入邮箱" clearable
+          <el-form ref="loginForm" :rules="rules" :model="loginForm" label-width="20%">
+            <el-form-item label="用户名" prop="userName" required>
+              <el-input v-model="loginForm.userName" type="text" autocomplete="off" placeholder="请输入用户名" clearable
                         size="medium" style="width: 90%"></el-input>
             </el-form-item>
-            <el-form-item label="密码" required>
+            <el-form-item label="密码" prop="password" required>
               <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" clearable
                         size="medium" style="width: 90%"></el-input>
             </el-form-item>
             <el-form-item label-width="0">
-              <el-button type="primary" @click="onLogin" style="margin-left: 20%">登录</el-button>
-              <el-button type="primary" @click="toRegister" style="float: right;margin-right: 20%">注册</el-button>
+              <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>
+              <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>
               <div class="clearBox"></div>
             </el-form-item>
           </el-form>
         </el-main>
+        <el-aside width="30%"></el-aside>
       </el-container>
     </div>
   </div>
@@ -37,9 +35,17 @@ export default {
     return {
       user: {},
       loginForm: {
-        email: "",
+        userName: "",
         password: ""
       },
+      rules: { //prop的名字必须和uer中的名字一样！！！
+        userName: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码'}
+        ],
+      }
     }
   },
   created() {
@@ -50,8 +56,9 @@ export default {
   methods: {
     onLogin: function () {
       const _this = this
+
       let formData = new FormData();
-      formData.append('email', _this.loginForm.email);
+      formData.append('userName', _this.loginForm.userName);
       formData.append('password', _this.loginForm.password);
       this.$axios.post('/user/login', formData, {
         headers: {
@@ -61,12 +68,25 @@ export default {
       }).then(function (response) {
         // 这里是处理正确的回调
         if (response.data.code == '0') {
-          _this.user = response.data.data;
-          localStorage.setItem('username', response.data.data.name);
-          localStorage.setItem('role', response.data.data.role);
+          // _this.user = response.data.data;
+          localStorage.setItem('userName', _this.loginForm.userName);
+          localStorage.setItem('id',response.data.data.id);
+          localStorage.setItem('password',_this.loginForm.password);
+          localStorage.setItem('realName',response.data.data.realName);
+          localStorage.setItem('phone',response.data.data.phone);
+          localStorage.setItem('email',response.data.data.email);
+          localStorage.setItem('description',response.data.data.description);
+          localStorage.setItem('sex',response.data.data.sex);
+          if(response.data.data.logoImage != null){
+            localStorage.setItem('logoImage',response.data.data.logoImage)
+          }else{
+            localStorage.setItem('logoImage',"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
+          }
+
+
           let flag = true;
           _this.$store.commit('login', flag);
-          _this.$router.push({name: 'Home', params: {isReload: 'true'}});
+          _this.$router.push({name: 'UserList', params: {isReload: 'true'}});
         }else{
           _this.$message.error(response.data.msg);
         }
@@ -76,7 +96,6 @@ export default {
       });
     },
     toRegister: function () {
-      console.log(this.$route.path);
       if (this.$route.path !== "/register") {
         this.$router.push("/register");
       }
