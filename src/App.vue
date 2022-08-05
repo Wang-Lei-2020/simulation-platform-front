@@ -47,7 +47,7 @@
                     <i class="el-icon-s-tools"></i>
                     <span>系统设置</span>
                   </template>
-                  <el-menu-item class="submenu" index="4-1" @click="toUserList()">  系统用户</el-menu-item>
+                  <el-menu-item v-if="getRole" class="submenu" index="4-1" @click="toUserList()">  系统用户</el-menu-item>
                   <el-menu-item class="submenu" index="4-2" @click="toUserInfo()">  个人信息</el-menu-item>
                 </el-submenu>
                 <el-submenu index="5">
@@ -64,9 +64,10 @@
                     <i class="el-icon-s-data"></i>
                     <span>教学管理</span>
                   </template>
-                  <el-menu-item class="submenu" index="6-1" @click="toDataManagement()">实验教学</el-menu-item>
-                  <el-menu-item class="submenu" index="6-2" @click="toDataManagement()">实验考核</el-menu-item>
-                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验成绩</el-menu-item>
+                  <el-menu-item class="submenu" index="6-1" @click="toCourseManagement()">课程管理</el-menu-item>
+                  <el-menu-item class="submenu" index="6-2" @click="toDataManagement()">实验教学</el-menu-item>
+                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验考核</el-menu-item>
+                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验成绩</el-menu-item>
                 </el-submenu>
               </el-menu>
             </el-row>
@@ -122,6 +123,13 @@ export default {
       }
       else{
         return "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      }
+    },
+    getRole: function(){
+      if(localStorage.getItem('role') == "student"){
+        return false
+      }else{
+        return true
       }
     }
   },
@@ -200,6 +208,11 @@ export default {
     toExperiment: function () {
       if (this.$route.path !== "/experiment") {
         this.$router.push({name:"Experiment",params:{isReload: 'true'}});
+      }
+    },
+    toCourseManagement: function(){
+      if (this.$route.path !== "/courseManagement") {
+        this.$router.push({name:"CourseManagement",params:{isReload: 'true'}});
       }
     }
   }

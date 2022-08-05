@@ -47,7 +47,7 @@ export default {
     checkPassword: function(){
       const _this = this;
       let formData = new FormData;
-      formData.append("id",localStorage.getItem("id"))
+      formData.append("userId",localStorage.getItem("userId"))
       formData.append("password",_this.ruleForm.originalPassword)
       this.$axios.post('/user/checkPassword', formData, {
         headers: {
@@ -72,7 +72,7 @@ export default {
       if(_this.ruleForm.originalPassword == localStorage.getItem('password')) {
         if (_this.ruleForm.newPassword == _this.ruleForm.checkPassword) {
           this.$axios.post('/user/update', {
-            "id" : localStorage.getItem('id'),
+            "userId" : localStorage.getItem('userId'),
             "userName" : localStorage.getItem('userName'),
             "password" : _this.ruleForm.checkPassword,
             "realName" : localStorage.getItem('realName'),

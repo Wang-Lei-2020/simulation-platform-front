@@ -16,7 +16,7 @@
 
         <el-form :model="user" :rules="rules" label-width="20%">
           <el-form-item label="用户编号" required>
-            <el-input v-model="user.id" type="text" autocomplete="off" disabled
+            <el-input v-model="user.userId" type="text" autocomplete="off" disabled
                       size="medium" style="width: 90%"></el-input>
           </el-form-item>
           <el-form-item label="用户名" prop="userName">
@@ -27,9 +27,15 @@
             <el-input v-model="user.realName" type="text" autocomplete="off" placeholder="请输入真实姓名" clearable
                       size="medium" style="width: 90%"></el-input>
           </el-form-item>
+          <el-form-item label="角色" prop="role" required>
+            <el-select v-model="user.role" placeholder="请选择角色" style="width: 90%" disabled>
+              <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" >
+              </el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item label="性别" required>
             <el-select v-model="user.sex" placeholder="请选择性别" style="width: 90%">
-              <el-option v-for="item in options" :key="item.label" :label="item.label" :value="item.label" >
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" >
               </el-option>
             </el-select>
           </el-form-item>
@@ -72,7 +78,7 @@ export default {
   data() {
     return {
       user: {
-        id:0,
+        userId:0,
         userName: "",
         realName:"",
         sex:"",
@@ -80,18 +86,25 @@ export default {
         password: "",
         phone: "",
         description:"",
+        role:"",
       },
-      sex:"男",
       ChangePasswordFlag: false,
       options: [{
-        value: '选项1',
+        value: '男',
         label: '男'
       }, {
-        value: '选项2',
+        value: '女',
         label: '女',
       }, {
-        value: '选项3',
+        value: '其他',
         label: '其他',
+      }],
+      roleOptions: [{
+        value: 'student',
+        label: '学生'
+      }, {
+        value: 'teacher',
+        label: '教师',
       }],
       rules: { //prop的名字必须和uer中的名字一样！！！
         userName: [
@@ -112,24 +125,6 @@ export default {
         phone: [
           { required: true, message: '请输入电话', trigger: 'blur' }
         ],
-        // mobile: [
-        //   { required: true, message: '请输入移动电话', trigger: 'blur' }
-        // ],
-      }
-    }
-  },
-  watch: {
-    sex(newName){
-      if(newName == "选项1"){
-        this.user.sex = "男";
-      }
-      else if(newName == "选项2") {
-        this.user.sex = "女";
-        //print(111);
-      }
-      else if(newName == "选项3") {
-        this.user.sex = "其他";
-        //print(111);
       }
     }
   },
@@ -141,7 +136,7 @@ export default {
   },
   methods: {
     getUserInfo: function(){
-      this.user.id = localStorage.getItem('id');
+      this.user.userId = localStorage.getItem('userId');
       this.user.userName = localStorage.getItem('userName');
       this.user.realName = localStorage.getItem('realName');
       this.user.password = localStorage.getItem('password');
@@ -149,11 +144,12 @@ export default {
       this.user.email = localStorage.getItem('email');
       this.user.description = localStorage.getItem('description');
       this.user.sex = localStorage.getItem('sex');
+      this.user.role = localStorage.getItem('role');
     },
     save: function(){
       const _this = this;
       this.$axios.post('/user/update', {
-        "id" : _this.user.id,
+        "userId" : _this.user.userId,
         "userName" : _this.user.userName,
         "password" : _this.user.password,
         "realName" : _this.user.realName,
@@ -167,7 +163,7 @@ export default {
         },
         withCredentials: true
       }).then(function (/*response*/) {
-        localStorage.setItem("id",_this.user.id);
+        localStorage.setItem("userId",_this.user.userId);
         localStorage.setItem("userName",_this.user.userName);
         localStorage.setItem("realName",_this.user.realName);
         localStorage.setItem("email",_this.user.email);

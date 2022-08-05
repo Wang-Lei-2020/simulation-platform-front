@@ -10,7 +10,7 @@
     <div class="userList">
     <el-table :data="userList" border>
       <el-table-column type="selection" width="40" align="center" />
-      <el-table-column label="用户编号" align="center" prop="id" fixed-width />
+      <el-table-column label="用户编号" align="center" prop="userId" fixed-width />
       <el-table-column label="用户名" align="center" prop="userName" fixed-width />
       <el-table-column label="真实姓名" align="center" prop="realName" fixed-width />
       <el-table-column label="性别" align="center" prop="sex" fixed-width />

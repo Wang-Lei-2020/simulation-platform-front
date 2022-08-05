@@ -6,6 +6,7 @@ import UserList from "@/components/UserList";
 import UserInfo from "@/components/UserInfo";
 import SceneView from "@/components/SceneView";
 import Experiment from "@/components/Experiment";
+import CourseManagement from "@/components/CourseManagement";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [
         path: '/experiment',
         name: 'Experiment',
         component: Experiment
+    },
+    {
+        path: '/courseManagement',
+        name: 'CourseManagement',
+        component: CourseManagement
     }
 ];
 

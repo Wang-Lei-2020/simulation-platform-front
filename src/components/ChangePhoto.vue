@@ -56,7 +56,7 @@ export default {
     changePhoto:function(){
       const _this = this
       this.$axios.post('/user/changePhoto', {
-        "id":localStorage.getItem("id"),
+        "userId":localStorage.getItem("userId"),
         "logoImage":_this.uploadPicUrl,
       }, {
         headers: {

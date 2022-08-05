@@ -88,13 +88,14 @@ export default {
         if (response.data.code == '0') {
           // _this.user = response.data.data;
           localStorage.setItem('userName', _this.loginForm.userName);
-          localStorage.setItem('id',response.data.data.id);
+          localStorage.setItem('userId',response.data.data.userId);
           localStorage.setItem('password',_this.loginForm.password);
           localStorage.setItem('realName',response.data.data.realName);
           localStorage.setItem('phone',response.data.data.phone);
           localStorage.setItem('email',response.data.data.email);
           localStorage.setItem('description',response.data.data.description);
           localStorage.setItem('sex',response.data.data.sex);
+          localStorage.setItem('role',response.data.data.role);
           if(response.data.data.logoImage != null){
             localStorage.setItem('logoImage',response.data.data.logoImage)
           }else{
