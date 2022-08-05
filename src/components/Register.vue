@@ -16,8 +16,14 @@
                       size="medium" style="width: 90%"></el-input>
           </el-form-item>
           <el-form-item label="性别" required>
-            <el-select v-model="sex" placeholder="请选择性别" style="width: 90%">
+            <el-select v-model="user.sex" placeholder="请选择性别" style="width: 90%">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" >
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="角色" prop="role" required>
+            <el-select v-model="user.role" placeholder="请选择角色" style="width: 90%">
+              <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" >
               </el-option>
             </el-select>
           </el-form-item>
@@ -73,6 +79,7 @@ export default {
         userName: "",
         realName:"",
         sex:"",
+        role:"",
         email: "",
         password: "",
         passwordChecked:"",
@@ -83,14 +90,21 @@ export default {
       sex:"",
       validation:" ",
       options: [{
-        value: '选项1',
+        value: '男',
         label: '男'
       }, {
-        value: '选项2',
+        value: '女',
         label: '女',
       }, {
-        value: '选项3',
+        value: '其他',
         label: '其他',
+      }],
+      roleOptions: [{
+        value: 'student',
+        label: '学生'
+      }, {
+        value: 'teacher',
+        label: '教师',
       }],
       rules: { //prop的名字必须和uer中的名字一样！！！
         userName: [
@@ -114,19 +128,19 @@ export default {
       }
     }
   },
-  watch: {
-    sex(newName){
-      if(newName == "选项1"){
-        this.user.sex = "男";
-      }
-      else if(newName == "选项2") {
-        this.user.sex = "女";
-      }
-      else if(newName == "选项3") {
-        this.user.sex = "其他";
-      }
-    }
-  },
+  // watch: {
+  //   sex(newName){
+  //     if(newName == "选项1"){
+  //       this.user.sex = "男";
+  //     }
+  //     else if(newName == "选项2") {
+  //       this.user.sex = "女";
+  //     }
+  //     else if(newName == "选项3") {
+  //       this.user.sex = "其他";
+  //     }
+  //   }
+  // },
   created() {
     if(this.$route.params.isReload == 'true'){
       this.$router.go(0);

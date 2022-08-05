@@ -15,6 +15,12 @@
               <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" clearable
                         size="medium" style="width: 90%"></el-input>
             </el-form-item>
+            <el-form-item label="角色" prop="role" required>
+              <el-select v-model="loginForm.role" placeholder="请选择角色" style="width: 90%">
+                <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" >
+                </el-option>
+              </el-select>
+            </el-form-item>
             <el-form-item label-width="0">
               <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>
               <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>
@@ -36,7 +42,8 @@ export default {
       user: {},
       loginForm: {
         userName: "",
-        password: ""
+        password: "",
+        role: ""
       },
       rules: { //prop的名字必须和uer中的名字一样！！！
         userName: [
@@ -45,7 +52,17 @@ export default {
         password: [
           { required: true, message: '请输入密码'}
         ],
-      }
+        role: [
+          { required: true, message: '请选择角色'}
+        ],
+      },
+      roleOptions: [{
+        value: 'student',
+        label: '学生'
+      }, {
+        value: 'teacher',
+        label: '教师',
+      }],
     }
   },
   created() {
@@ -60,6 +77,7 @@ export default {
       let formData = new FormData();
       formData.append('userName', _this.loginForm.userName);
       formData.append('password', _this.loginForm.password);
+      formData.append('role',_this.loginForm.role)
       this.$axios.post('/user/login', formData, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
