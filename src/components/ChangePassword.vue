@@ -96,7 +96,7 @@ export default {
             _this.$router.push({name: "Login", params: {isReload: 'true'}});
           }).catch(function (response) {
             // 这里是处理错误的回调
-            _this.$message.error(response.data.message)
+            _this.$message.error(response.data.msg)
           })
         } else {
           _this.$message({

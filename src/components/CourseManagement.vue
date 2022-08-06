@@ -1,15 +1,33 @@
 <template>
   <div>
-    <div class="search bar7">
-      <el-form onsubmit="return false">
-        <input v-model="searchArea" type="text" placeholder="请输入您要搜索的课程名...">
-        <button class="searchButton" @click="search()"></button>
-      </el-form>
+    <el-dialog
+        title="添加课程"
+        :visible.sync="addCourseFlag"
+        :before-close="handleClose"
+        width="30%">
+      <AddCourse></AddCourse>
+    </el-dialog>
+
+    <el-dialog
+        title="编辑课程"
+        :visible.sync="editCourseFlag"
+        :before-close="handleClose"
+        width="30%">
+      <EditCourse></EditCourse>
+    </el-dialog>
+
+    <div>
+      <div class="search bar7" style="float: left">
+        <el-form onsubmit="return false">
+          <input v-model="searchArea" type="text" placeholder="请输入您要搜索的课程名...">
+          <button class="searchButton" @click="search()"></button>
+        </el-form>
+      </div>
+      <el-button v-if="isTeacher" type="primary" style="float:right;margin-right: 100px;margin-top: 12px" icon="el-icon-circle-plus" @click="addCourse()">添加课程</el-button>
     </div>
 
     <div class="courseList">
       <el-table :data="courseList" border>
-        <el-table-column type="selection" width="40" align="center" />
         <el-table-column label="课程编号" align="center" prop="courseId" fixed-width />
         <el-table-column label="课程名" align="center" prop="courseName" fixed-width />
         <el-table-column label="授课教师" align="center" prop="courseTeacher" fixed-width />
@@ -20,7 +38,8 @@
 
         <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
           <template slot-scope="scope">
-            <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row.courseId)">选课</el-button>
+            <el-button v-if="!isTeacher" size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row.courseId)">选课</el-button>
+            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-edit-outline" @click="editCourse(scope.row)">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -40,8 +59,12 @@
 </template>
 
 <script>
+import AddCourse from "@/components/AddCourse";
+import EditCourse from "@/components/EditCourse";
+
 export default {
   name: "CourseManagement",
+  components:{EditCourse, AddCourse},
   data() {
     return{
       courseList:[],
@@ -53,7 +76,23 @@ export default {
         "from":0,
         "num":10,
       },
-
+      addCourseFlag: false,
+      editCourseFlag: false,
+    }
+  },
+  created() {
+    if (this.$route.params.isReload === 'true') {
+      this.$router.go(0);
+    }
+    this.getCourseList();
+  },
+  computed: {
+    isTeacher: function(){
+      if(localStorage.getItem('role') === "teacher"){
+        return true
+      }else{
+        return false
+      }
     }
   },
   methods:{
@@ -86,20 +125,24 @@ export default {
     },
     selectCourse: function(courseId){
       const _this = this;
-      this.$axios.post('/course/selectCourse', {"courseId":courseId,"userId":localStorage.getItem("userId")}, {
+      this.$axios.post('/course/select', {"courseId":courseId,"userId":localStorage.getItem("userId")}, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
         },
         withCredentials: true
       }).then(function (response) {
-        // 这里是处理正确的回调
-        _this.courseList= response.data.data;
-        _this.pageSize = 100;
-        // _this.pageNum = response.data.data.pageNum;
-        _this.$message({
-          message: '搜索成功',
-          type: 'success'
-        });
+        if(response.data.code == '0') {
+          // 这里是处理正确的回调
+          _this.$message({
+            message: '选课成功',
+            type: 'success'
+          });
+        }else{
+          _this.$message({
+            message: response.data.msg,
+            type: 'warning'
+          });
+        }
       }).catch(function (response) {
         // 这里是处理错误的回调
         console.log(response)
@@ -124,7 +167,6 @@ export default {
         // 这里是处理错误的回调
         console.log(response)
       })
-
     },
     getTotalCourse: function(){
       const _this = this;
@@ -142,6 +184,28 @@ export default {
         console.log(response)
       })
     },
+    addCourse: function(){
+      this.addCourseFlag = true;
+    },
+    editCourse: function(row){
+      const _this = this;
+      if(row.courseTeacher == localStorage.getItem('realName')){
+        this.editCourseFlag = true
+        localStorage.setItem('editedCourseId',row.courseId)
+        localStorage.setItem('editedCourseName',row.courseName)
+        localStorage.setItem('editedIntroduction',row.introduction)
+        localStorage.setItem('editedCourseCredit',row.courseCredit)
+        localStorage.setItem('editedCapacity',row.capacity)
+      }else{
+        _this.$message({
+          message: '只能编辑自己的课程！',
+          type: 'warning'
+        });
+      }
+    },
+    handleClose(done) {
+      done();
+    }
   }
 }
 </script>
@@ -165,12 +229,13 @@ body {
   font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 }
 
-div.search {padding: 20px 0;}
+div.search {padding: 10px 0;}
 
 form {
   position: relative;
   width: 300px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
+  margin-left: 350px;
 }
 
 input, button {

@@ -65,9 +65,10 @@
                     <span>教学管理</span>
                   </template>
                   <el-menu-item class="submenu" index="6-1" @click="toCourseManagement()">课程管理</el-menu-item>
-                  <el-menu-item class="submenu" index="6-2" @click="toDataManagement()">实验教学</el-menu-item>
-                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验考核</el-menu-item>
-                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验成绩</el-menu-item>
+                  <el-menu-item v-if="!isTeacher" class="submenu" index="6-2" @click="toMyCourse()">我的课程</el-menu-item>
+                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验教学</el-menu-item>
+                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验考核</el-menu-item>
+                  <el-menu-item class="submenu" index="6-5" @click="toDataManagement()">实验成绩</el-menu-item>
                 </el-submenu>
               </el-menu>
             </el-row>
@@ -130,6 +131,13 @@ export default {
         return false
       }else{
         return true
+      }
+    },
+    isTeacher: function(){
+      if(localStorage.getItem('role') === "teacher"){
+        return true
+      }else{
+        return false
       }
     }
   },
@@ -214,7 +222,12 @@ export default {
       if (this.$route.path !== "/courseManagement") {
         this.$router.push({name:"CourseManagement",params:{isReload: 'true'}});
       }
-    }
+    },
+    toMyCourse: function(){
+      if (this.$route.path !== "/myCourse") {
+        this.$router.push({name:"MyCourse",params:{isReload: 'true'}});
+      }
+    },
   }
 }
 </script>
