@@ -71,6 +71,7 @@
 
 <script>
 import ChangePassword from "@/components/ChangePassword";
+import Vue from "vue";
 
 export default {
   name: "UserInfo",
@@ -129,22 +130,33 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.isReload == 'true') {
+    if (this.$route.params.isReload === 'true') {
       this.$router.go(0);
     }
     this.getUserInfo();
   },
   methods: {
     getUserInfo: function(){
-      this.user.userId = localStorage.getItem('userId');
-      this.user.userName = localStorage.getItem('userName');
-      this.user.realName = localStorage.getItem('realName');
-      this.user.password = localStorage.getItem('password');
-      this.user.phone = localStorage.getItem('phone');
-      this.user.email = localStorage.getItem('email');
-      this.user.description = localStorage.getItem('description');
-      this.user.sex = localStorage.getItem('sex');
-      this.user.role = localStorage.getItem('role');
+      // this.user.userId = localStorage.getItem('userId');
+      // this.user.userName = localStorage.getItem('userName');
+      // this.user.realName = localStorage.getItem('realName');
+      // this.user.password = localStorage.getItem('password');
+      // this.user.phone = localStorage.getItem('phone');
+      // this.user.email = localStorage.getItem('email');
+      // this.user.description = localStorage.getItem('description');
+      // this.user.sex = localStorage.getItem('sex');
+      // this.user.role = localStorage.getItem('role');
+
+      this.user.userId = Vue.$cookies.get('userId')
+      this.user.userName = Vue.$cookies.get('userName');
+      this.user.realName = Vue.$cookies.get('realName');
+      this.user.password = Vue.$cookies.get('password');
+      this.user.phone = Vue.$cookies.get('phone');
+      this.user.email = Vue.$cookies.get('email');
+      this.user.description = Vue.$cookies.get('description');
+      this.user.sex = Vue.$cookies.get('sex');
+      this.user.role = Vue.$cookies.get('role');
+
     },
     save: function(){
       const _this = this;
@@ -163,14 +175,23 @@ export default {
         },
         withCredentials: true
       }).then(function (/*response*/) {
-        localStorage.setItem("userId",_this.user.userId);
-        localStorage.setItem("userName",_this.user.userName);
-        localStorage.setItem("realName",_this.user.realName);
-        localStorage.setItem("email",_this.user.email);
-        localStorage.setItem("phone",_this.user.phone);
-        localStorage.setItem("description",_this.user.description);
-        localStorage.setItem("sex",_this.user.sex);
-        localStorage.setItem("password",_this.user.password);
+        // localStorage.setItem("userId",_this.user.userId);
+        // localStorage.setItem("userName",_this.user.userName);
+        // localStorage.setItem("realName",_this.user.realName);
+        // localStorage.setItem("email",_this.user.email);
+        // localStorage.setItem("phone",_this.user.phone);
+        // localStorage.setItem("description",_this.user.description);
+        // localStorage.setItem("sex",_this.user.sex);
+        // localStorage.setItem("password",_this.user.password);
+
+        Vue.$cookies.set("userId",_this.user.userId, "1D");
+        Vue.$cookies.set("userName",_this.user.userName, "1D");
+        Vue.$cookies.set("realName",_this.user.realName, "1D");
+        Vue.$cookies.set("email",_this.user.email, "1D");
+        Vue.$cookies.set("phone",_this.user.phone, "1D");
+        Vue.$cookies.set("description",_this.user.description, "1D");
+        Vue.$cookies.set("sex",_this.user.sex, "1D");
+        Vue.$cookies.set("password",_this.user.password, "1D");
 
         // 这里是处理正确的回调
         _this.$message({

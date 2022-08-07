@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "ChangePassword",
   data() {
@@ -47,7 +49,8 @@ export default {
     checkPassword: function(){
       const _this = this;
       let formData = new FormData;
-      formData.append("userId",localStorage.getItem("userId"))
+      // formData.append("userId",localStorage.getItem("userId"))
+      formData.append("userId",Vue.$cookies.get("userId"))
       formData.append("password",_this.ruleForm.originalPassword)
       this.$axios.post('/user/checkPassword', formData, {
         headers: {
@@ -56,11 +59,7 @@ export default {
         withCredentials: true
       }).then(function (response) {
         _this.correctPassword = response.data.data
-        if(response.data.data == 1){
-          return true;
-        }else{
-          return false;
-        }
+        return response.data.data === 1;
       }).catch(function (response) {
         console.log(response)
         return false;
@@ -69,17 +68,27 @@ export default {
     changePassword: function(){
       const _this = this;
       //_this.checkPassword()//未实现两函数异步执行
-      if(_this.ruleForm.originalPassword == localStorage.getItem('password')) {
-        if (_this.ruleForm.newPassword == _this.ruleForm.checkPassword) {
+      // if(_this.ruleForm.originalPassword === localStorage.getItem('password')) {
+      if(_this.ruleForm.originalPassword === Vue.$cookies.get('password')) {
+        if (_this.ruleForm.newPassword === _this.ruleForm.checkPassword) {
           this.$axios.post('/user/update', {
-            "userId" : localStorage.getItem('userId'),
-            "userName" : localStorage.getItem('userName'),
+            // "userId" : localStorage.getItem('userId'),
+            // "userName" : localStorage.getItem('userName'),
+            // "password" : _this.ruleForm.checkPassword,
+            // "realName" : localStorage.getItem('realName'),
+            // "sex" : localStorage.getItem('sex'),
+            // "email" : localStorage.getItem('email'),
+            // "phone" : localStorage.getItem('phone'),
+            // "description" : localStorage.getItem('description')
+
+            "userId" : Vue.$cookies.get('userId'),
+            "userName" : Vue.$cookies.get('userName'),
             "password" : _this.ruleForm.checkPassword,
-            "realName" : localStorage.getItem('realName'),
-            "sex" : localStorage.getItem('sex'),
-            "email" : localStorage.getItem('email'),
-            "phone" : localStorage.getItem('phone'),
-            "description" : localStorage.getItem('description')
+            "realName" : Vue.$cookies.get('realName'),
+            "sex" : Vue.$cookies.get('sex'),
+            "email" : Vue.$cookies.get('email'),
+            "phone" : Vue.$cookies.get('phone'),
+            "description" : Vue.$cookies.get('description')
           }, {
             headers: {
               "Content-Type": "application/json;charset=utf-8"
@@ -88,7 +97,12 @@ export default {
           }).then(function (/*response*/) {
             let flag = false;
             _this.$store.commit('login', flag);
-            localStorage.clear();
+            // localStorage.clear();
+            const cookies = Vue.$cookies.keys();
+            for (let i = 0; i < cookies.length; i++) {
+              Vue.$cookies.remove(cookies[i])
+            }
+
             _this.$message({
               message: '修改密码成功！',
               type: 'success'

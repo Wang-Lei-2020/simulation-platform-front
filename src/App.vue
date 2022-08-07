@@ -95,6 +95,7 @@
 
 <script>
 import ChangePhoto from "@/components/ChangePhoto";
+import Vue from "vue";
 
 export default {
   name: "App",
@@ -108,28 +109,35 @@ export default {
   computed: {
     // 计算属性的 getter
     getUsername: function () {
-      if(localStorage.getItem('userName') == null){
+      // if(localStorage.getItem('userName') == null){
+      if(Vue.$cookies.get('userName') == null){
         return "未登录";
       }else{
-        return localStorage.getItem('userName');
+        // return localStorage.getItem('userName');
+        return Vue.$cookies.get('userName');
       }
     },
     getLoginState: function (){
-      return localStorage.getItem('userName') != null;
+      // return localStorage.getItem('userName') != null;
+      return Vue.$cookies.get('userName') != null;
     },
     getPhotoUrl: function(){
-      if(localStorage.getItem('logoImage') !== "null") {
-        return localStorage.getItem('logoImage');
+      // if(localStorage.getItem('logoImage') !== "null") {
+      if(Vue.$cookies.get('logoImage') !== "null") {
+        // return localStorage.getItem('logoImage');
+        return Vue.$cookies.get('logoImage');
       }
       else{
         return "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       }
     },
     getRole: function(){
-      return localStorage.getItem('role') !== "student";
+      // return localStorage.getItem('role') !== "student";
+      return Vue.$cookies.get('role') !== "student";
     },
     isTeacher: function(){
-      return localStorage.getItem('role') === "teacher";
+      // return localStorage.getItem('role') === "teacher";
+      return Vue.$cookies.get('role') === "teacher";
     },
 
   },
@@ -158,7 +166,12 @@ export default {
           if(response.data.code === '0'){
             let flag = false;
             _this.$store.commit('login', flag);
-            localStorage.clear();
+            // localStorage.clear();
+            const cookies = Vue.$cookies.keys();
+            for (let i = 0; i < cookies.length; i++) {
+              Vue.$cookies.remove(cookies[i])
+            }
+
             console.log(_this.$route.path);
             _this.$message({
               message: '登出成功！',
@@ -175,7 +188,12 @@ export default {
     toRegister: function () {
       let flag = false;
       this.$store.commit('login', flag);
-      localStorage.clear();
+      // localStorage.clear();
+      const cookies = Vue.$cookies.keys();
+      for (let i = 0; i < cookies.length; i++) {
+        Vue.$cookies.remove(cookies[i])
+      }
+
       console.log(this.$route.path);
       if (this.$route.path !== "/register") {
         this.$router.push({name:"Register",params:{isReload: 'true'}});

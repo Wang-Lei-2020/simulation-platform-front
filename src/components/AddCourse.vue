@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "AddCourse",
   data(){
@@ -57,7 +59,8 @@ export default {
     }
   },
   created(){
-    this.ruleForm.courseTeacher = localStorage.getItem('realName')
+    // this.ruleForm.courseTeacher = localStorage.getItem('realName')
+    this.ruleForm.courseTeacher = Vue.$cookies.get('realName')
   },
   methods: {
     addCourse: function(){

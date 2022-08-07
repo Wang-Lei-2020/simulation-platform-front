@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "MyCourse",
   data() {
@@ -36,7 +38,9 @@ export default {
     getMyCourseList: function(){
       const _this = this;
       let formData = new FormData;
-      formData.append('userId',localStorage.getItem('userId'));
+      // formData.append('userId',localStorage.getItem('userId'));
+      formData.append('userId',Vue.$cookies.get('userId'));
+
       this.$axios.post('/course/myCourseList', formData, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
@@ -52,7 +56,8 @@ export default {
     },
     deletePickCourse: function(row){
       const _this = this;
-      this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':localStorage.getItem('userId')}, {
+      // this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':localStorage.getItem('userId')}, {
+      this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':Vue.$cookies.get('userId')}, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
         },

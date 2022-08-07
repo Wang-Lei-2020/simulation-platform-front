@@ -22,6 +22,7 @@
 
 <script>
 import {genUpToken} from "./qiniuToken";
+import Vue from "vue";
 
 export default {
   name: "ChangePhoto",
@@ -56,7 +57,8 @@ export default {
     changePhoto:function(){
       const _this = this
       this.$axios.post('/user/changePhoto', {
-        "userId":localStorage.getItem("userId"),
+        // "userId":localStorage.getItem("userId"),
+        "userId":Vue.$cookies.get("userId"),
         "logoImage":_this.uploadPicUrl,
       }, {
         headers: {
@@ -65,19 +67,26 @@ export default {
         withCredentials: true
       }).then(function (response) {
         // 这里是处理正确的回调
-        if (response.data.code == '503') {
-          if (JSON.parse(localStorage.getItem('islogin'))) { //判断本地是否存在access_token
+        if (response.data.code === '503') {
+          // if (JSON.parse(localStorage.getItem('islogin'))) { //判断本地是否存在access_token
+          if (JSON.parse(Vue.$cookies.get('islogin'))) { //判断本地是否存在access_token
             let flag = false;
             _this.$store.commit('login', flag);
-            localStorage.clear();
+            // localStorage.clear();
+            const cookies = Vue.$cookies.keys();
+            for (let i = 0; i < cookies.length; i++) {
+              Vue.$cookies.remove(cookies[i])
+            }
+
             _this.$router.go(0);
             _this.$message('您的登录已超时，请重新登录');
           } else {
             _this.$message(response.data.msg);
           }
         } else {
-          if (response.data.code == '0') {
-            localStorage.setItem('userUrl', _this.uploadPicUrl)
+          if (response.data.code === '0') {
+            // localStorage.setItem('userUrl', _this.uploadPicUrl)
+            Vue.$cookies.set('userUrl', _this.uploadPicUrl, "1D")
             _this.$message({
               message: '更改头像成功！',
               type: 'success'

@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
     // console.log(to);
     // console.log(from);
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-        if (JSON.parse(localStorage.getItem('islogin'))) { //判断本地是否存在access_token
+        if (JSON.parse(Vue.$cookies.get('islogin'))) { //判断本地是否存在access_token
             next();
         } else {
             next({
@@ -50,7 +50,9 @@ router.beforeEach((to, from, next) => {
     }
     /*如果本地 存在 token 则 不允许直接跳转到 登录页面*/
     if (to.fullPath === "/login") {
-        if (JSON.parse(localStorage.getItem('islogin'))) {
+        // if (JSON.parse(localStorage.getItem('islogin'))) {
+        if (JSON.parse(Vue.$cookies.get('islogin'))) {
+
             next({
                 path: from.fullPath
             });

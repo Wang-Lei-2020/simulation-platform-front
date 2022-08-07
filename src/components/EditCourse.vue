@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "EditCourse",
   data(){
@@ -91,12 +93,19 @@ export default {
       })
     },
     getCourseInfo: function(){
-      this.ruleForm.courseId = localStorage.getItem('editedCourseId')
-      this.ruleForm.courseName = localStorage.getItem('editedCourseName')
-      this.ruleForm.courseTeacher = localStorage.getItem('realName')
-      this.ruleForm.introduction = localStorage.getItem('editedIntroduction')
-      this.ruleForm.courseCredit = localStorage.getItem('editedCourseCredit')
-      this.ruleForm.capacity= localStorage.getItem('editedCapacity')
+      // this.ruleForm.courseId = localStorage.getItem('editedCourseId')
+      // this.ruleForm.courseName = localStorage.getItem('editedCourseName')
+      // this.ruleForm.courseTeacher = localStorage.getItem('realName')
+      // this.ruleForm.introduction = localStorage.getItem('editedIntroduction')
+      // this.ruleForm.courseCredit = localStorage.getItem('editedCourseCredit')
+      // this.ruleForm.capacity= localStorage.getItem('editedCapacity')
+
+      this.ruleForm.courseId = Vue.$cookies.get('editedCourseId')
+      this.ruleForm.courseName = Vue.$cookies.get('editedCourseName')
+      this.ruleForm.courseTeacher = Vue.$cookies.get('realName')
+      this.ruleForm.introduction = Vue.$cookies.get('editedIntroduction')
+      this.ruleForm.courseCredit = Vue.$cookies.get('editedCourseCredit')
+      this.ruleForm.capacity= Vue.$cookies.get('editedCapacity')
     },
     reset: function(){
       this.getCourseInfo()

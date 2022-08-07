@@ -62,6 +62,7 @@
 <script>
 import AddCourse from "@/components/AddCourse";
 import EditCourse from "@/components/EditCourse";
+import Vue from "vue";
 
 export default {
   name: "CourseManagement",
@@ -89,11 +90,8 @@ export default {
   },
   computed: {
     isTeacher: function(){
-      if(localStorage.getItem('role') === "teacher"){
-        return true
-      }else{
-        return false
-      }
+      // return localStorage.getItem('role') === "teacher";
+      return Vue.$cookies.get('role') === "teacher";
     }
   },
   methods:{
@@ -126,13 +124,14 @@ export default {
     },
     selectCourse: function(courseId){
       const _this = this;
-      this.$axios.post('/course/select', {"courseId":courseId,"userId":localStorage.getItem("userId")}, {
+      // this.$axios.post('/course/select', {"courseId":courseId,"userId":localStorage.getItem("userId")}, {
+      this.$axios.post('/course/select', {"courseId":courseId,"userId":Vue.$cookies.get("userId")}, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
         },
         withCredentials: true
       }).then(function (response) {
-        if(response.data.code == '0') {
+        if(response.data.code === '0') {
           // 这里是处理正确的回调
           _this.$message({
             message: '选课成功',
@@ -190,13 +189,20 @@ export default {
     },
     editCourse: function(row){
       const _this = this;
-      if(row.courseTeacher == localStorage.getItem('realName')){
+      // if(row.courseTeacher === localStorage.getItem('realName')){
+      if(row.courseTeacher === Vue.$cookies.get('realName')){
         this.editCourseFlag = true
-        localStorage.setItem('editedCourseId',row.courseId)
-        localStorage.setItem('editedCourseName',row.courseName)
-        localStorage.setItem('editedIntroduction',row.introduction)
-        localStorage.setItem('editedCourseCredit',row.courseCredit)
-        localStorage.setItem('editedCapacity',row.capacity)
+        // localStorage.setItem('editedCourseId',row.courseId)
+        // localStorage.setItem('editedCourseName',row.courseName)
+        // localStorage.setItem('editedIntroduction',row.introduction)
+        // localStorage.setItem('editedCourseCredit',row.courseCredit)
+        // localStorage.setItem('editedCapacity',row.capacity)
+
+        Vue.$cookies.set('editedCourseId',row.courseId, "1D")
+        Vue.$cookies.set('editedCourseName',row.courseName, "1D")
+        Vue.$cookies.set('editedIntroduction',row.introduction, "1D")
+        Vue.$cookies.set('editedCourseCredit',row.courseCredit, "1D")
+        Vue.$cookies.set('editedCapacity',row.capacity, "1D")
       }else{
         _this.$message({
           message: '只能编辑自己的课程！',
@@ -206,7 +212,8 @@ export default {
     },
     cancelCourse: function(row){
       const _this = this;
-      if(row.courseTeacher === localStorage.getItem('realName')) {
+      // if(row.courseTeacher === localStorage.getItem('realName')) {
+      if(row.courseTeacher === Vue.$cookies.get('realName')) {
         this.$axios.post('/course/delete', {'courseId':row.courseId,'courseTeacher':row.courseTeacher}, {
           headers: {
             "Content-Type": "application/json;charset=utf-8"

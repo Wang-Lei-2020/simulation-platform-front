@@ -12,7 +12,8 @@ export default new Vuex.Store({
         login: (state, n) => {
             //传入登录状态islogin
             let islogin = JSON.parse(n);
-            localStorage.setItem('islogin', JSON.stringify(islogin));
+            // localStorage.setItem('islogin', JSON.stringify(islogin));
+            Vue.$cookies.set('islogin', JSON.stringify(islogin), "1D");
             console.log("store:" + islogin);
             state.islogin = islogin;
         }

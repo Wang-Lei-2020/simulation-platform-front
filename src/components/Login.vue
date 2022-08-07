@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "Login",
   data() {
@@ -66,7 +68,11 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.isReload == 'true') {
+    if(Vue.$cookies.get("userName") !== null ) {
+      this.$router.push({name: 'UserList', params: {isReload: 'true'}});
+    }
+
+    if (this.$route.params.isReload === 'true') {
       this.$router.go(0);
     }
   },
@@ -85,21 +91,33 @@ export default {
         withCredentials: true
       }).then(function (response) {
         // 这里是处理正确的回调
-        if (response.data.code == '0') {
+        if (response.data.code === '0') {
           // _this.user = response.data.data;
-          localStorage.setItem('userName', _this.loginForm.userName);
-          localStorage.setItem('userId',response.data.data.userId);
-          localStorage.setItem('password',_this.loginForm.password);
-          localStorage.setItem('realName',response.data.data.realName);
-          localStorage.setItem('phone',response.data.data.phone);
-          localStorage.setItem('email',response.data.data.email);
-          localStorage.setItem('description',response.data.data.description);
-          localStorage.setItem('sex',response.data.data.sex);
-          localStorage.setItem('role',response.data.data.role);
+          // localStorage.setItem('userName', _this.loginForm.userName);
+          // localStorage.setItem('userId',response.data.data.userId);
+          // localStorage.setItem('password',_this.loginForm.password);
+          // localStorage.setItem('realName',response.data.data.realName);
+          // localStorage.setItem('phone',response.data.data.phone);
+          // localStorage.setItem('email',response.data.data.email);
+          // localStorage.setItem('description',response.data.data.description);
+          // localStorage.setItem('sex',response.data.data.sex);
+          // localStorage.setItem('role',response.data.data.role);
+
+          Vue.$cookies.set("userName", _this.loginForm.userName, "1D");
+          Vue.$cookies.set("userId", response.data.data.userId, "1D");
+          Vue.$cookies.set("password", _this.loginForm.password, "1D");
+          Vue.$cookies.set("realName", response.data.data.realName, "1D");
+          Vue.$cookies.set("phone", response.data.data.phone, "1D");
+          Vue.$cookies.set("email", response.data.data.email, "1D");
+          Vue.$cookies.set("description", response.data.data.description, "1D");
+          Vue.$cookies.set("sex", response.data.data.sex, "1D");
+          Vue.$cookies.set("role", response.data.data.role, "1D");
           if(response.data.data.logoImage != null){
-            localStorage.setItem('logoImage',response.data.data.logoImage)
+            // localStorage.setItem('logoImage',response.data.data.logoImage)
+            Vue.$cookies.set("logoImage", response.data.data.logoImage, "1D");
           }else{
-            localStorage.setItem('logoImage',"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
+            // localStorage.setItem('logoImage',"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
+            Vue.$cookies.set("logoImage", "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png", "1D");
           }
 
 
