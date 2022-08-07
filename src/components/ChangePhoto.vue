@@ -42,6 +42,10 @@ export default {
     };
   },
   created(){
+    if(Vue.$cookies.get("userName") == null ) {
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+
     var token;
     var policy = {};
     var bucketName = 'wanglei2021';

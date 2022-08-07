@@ -59,6 +59,10 @@ export default {
     }
   },
   created(){
+    if(Vue.$cookies.get("userName") == null ) {
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+
     // this.ruleForm.courseTeacher = localStorage.getItem('realName')
     this.ruleForm.courseTeacher = Vue.$cookies.get('realName')
   },

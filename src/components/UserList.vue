@@ -55,6 +55,8 @@
 <!--</template>-->
 
 <script>
+import Vue from "vue";
+
 export default {
   name: "UserList",
   data(){
@@ -72,7 +74,11 @@ export default {
 
   },
   created() {
-    if (this.$route.params.isReload == 'true') {
+    if(Vue.$cookies.get("userName") == null ) {
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+
+    if (this.$route.params.isReload === 'true') {
       this.$router.go(0);
     }
     this.getUserList();

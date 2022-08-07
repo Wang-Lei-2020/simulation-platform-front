@@ -44,6 +44,11 @@ export default {
       }
     };
   },
+  created() {
+    if(Vue.$cookies.get("userName") == null ) {
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+  },
   methods: {
     //此函数未用到
     checkPassword: function(){

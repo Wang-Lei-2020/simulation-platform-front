@@ -63,6 +63,10 @@ export default {
     }
   },
   created(){
+    if(Vue.$cookies.get("userName") == null ) {
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+
     this.getCourseInfo()
   },
   methods: {
