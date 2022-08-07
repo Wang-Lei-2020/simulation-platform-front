@@ -11,6 +11,7 @@
       <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row)">进入课程</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,6 +45,25 @@ export default {
       }).then(function (response) {
         // 这里是处理正确的回调
         _this.myCourseList= response.data.data;
+      }).catch(function (response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
+    },
+    deletePickCourse: function(row){
+      const _this = this;
+      this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':localStorage.getItem('userId')}, {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        withCredentials: true
+      }).then(function () {
+        // 这里是处理正确的回调
+        _this.$message({
+          message: '退课成功！',
+          type: 'success'
+        });
+        _this.$router.go(0)
       }).catch(function (response) {
         // 这里是处理错误的回调
         console.log(response)

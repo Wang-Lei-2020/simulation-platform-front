@@ -28,18 +28,19 @@
 
     <div class="courseList">
       <el-table :data="courseList" border>
-        <el-table-column label="课程编号" align="center" prop="courseId" fixed-width />
+        <el-table-column label="课程编号" align="center" prop="courseId" width="80px" />
         <el-table-column label="课程名" align="center" prop="courseName" fixed-width />
-        <el-table-column label="授课教师" align="center" prop="courseTeacher" fixed-width />
         <el-table-column label="课程介绍" align="center" prop="introduction" fixed-width />
-        <el-table-column label="学分" align="center" prop="courseCredit" fixed-width />
-        <el-table-column label="课容量" align="center" prop="capacity" fixed-width />
-        <el-table-column label="剩余量" align="center" prop="leftCapacity" fixed-width />
+        <el-table-column label="授课教师" align="center" prop="courseTeacher" width="90px" />
+        <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />
+        <el-table-column label="课容量" align="center" prop="capacity" width="90px" />
+<!--        <el-table-column label="剩余量" align="center" prop="leftCapacity" fixed-width />-->
 
         <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button v-if="!isTeacher" size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row.courseId)">选课</el-button>
             <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-edit-outline" @click="editCourse(scope.row)">编辑</el-button>
+            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-delete-solid" @click="cancelCourse(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -199,6 +200,32 @@ export default {
       }else{
         _this.$message({
           message: '只能编辑自己的课程！',
+          type: 'warning'
+        });
+      }
+    },
+    cancelCourse: function(row){
+      const _this = this;
+      if(row.courseTeacher === localStorage.getItem('realName')) {
+        this.$axios.post('/course/delete', {'courseId':row.courseId,'courseTeacher':row.courseTeacher}, {
+          headers: {
+            "Content-Type": "application/json;charset=utf-8"
+          },
+          withCredentials: true
+        }).then(function () {
+          // 这里是处理正确的回调
+          _this.$message({
+            message: '删除成功！',
+            type: 'success'
+          });
+          _this.$router.go(0)
+        }).catch(function (response) {
+          // 这里是处理错误的回调
+          console.log(response)
+        })
+      }else{
+        _this.$message({
+          message: '只能删除自己的课程！',
           type: 'warning'
         });
       }
