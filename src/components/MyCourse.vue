@@ -1,16 +1,16 @@
 <template>
   <div class="courseList" style="margin-top: 20px">
     <el-table :data="myCourseList" border>
-      <el-table-column label="课程编号" align="center" prop="courseId" fixed-width />
+      <el-table-column label="课程编号" align="center" prop="courseId" width="80px" />
       <el-table-column label="课程名" align="center" prop="courseName" fixed-width />
-      <el-table-column label="授课教师" align="center" prop="courseTeacher" fixed-width />
       <el-table-column label="课程介绍" align="center" prop="introduction" fixed-width />
-      <el-table-column label="学分" align="center" prop="courseCredit" fixed-width />
-      <el-table-column label="课容量" align="center" prop="capacity" fixed-width />
+      <el-table-column label="授课教师" align="center" prop="courseTeacher" width="90px" />
+      <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />
+      <el-table-column label="课容量" align="center" prop="capacity" width="90px" />
 
       <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row)">进入课程</el-button>
+          <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse()">进入课程</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>
         </template>
       </el-table-column>
@@ -78,9 +78,8 @@ export default {
         console.log(response)
       })
     },
-    selectCourse: function(row){
-      //TODO  等待编写
-      console.log(row.courseName)
+    selectCourse: function(/*row*/){
+      this.$router.push("/courseStudy");
     }
   }
 }

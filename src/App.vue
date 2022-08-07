@@ -39,7 +39,7 @@
               <el-menu
                   v-if="this.$route.path !== '/' && this.$route.path !== '/register'"
                   router
-                  :default-active="this.$router.path"
+                  :default-active="this.$route.path"
                   class="el-menu-vertical-demo"
                   @open="handleOpen"
                   @close="handleClose"
@@ -49,10 +49,10 @@
                     <i class="el-icon-s-tools"></i>
                     <span>系统设置</span>
                   </template>
-                      <el-menu-item v-if="getRole" class="submenu" index="/userList">  系统用户</el-menu-item>
-                      <el-menu-item class="submenu" index="/userInfo">  个人信息</el-menu-item>
-
+                  <el-menu-item v-if="getRole" class="submenu" index="/userList">系统用户</el-menu-item>
+                  <el-menu-item class="submenu" index="/userInfo">  个人信息</el-menu-item>
                 </el-submenu>
+
                 <el-submenu index="5">
                   <template slot="title">
                     <i class="el-icon-s-custom"></i>
@@ -69,9 +69,10 @@
                   </template>
                   <el-menu-item class="submenu" index="/courseManagement">课程管理</el-menu-item>
                   <el-menu-item v-if="!isTeacher" class="submenu" index="/myCourse">我的课程</el-menu-item>
-                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验教学</el-menu-item>
-                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验考核</el-menu-item>
-                  <el-menu-item class="submenu" index="6-5" @click="toDataManagement()">实验成绩</el-menu-item>
+                  <el-menu-item v-if="!isTeacher" class="submenu" index="/courseStudy">课程学习</el-menu-item>
+<!--                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验教学</el-menu-item>-->
+<!--                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验考核</el-menu-item>-->
+<!--                  <el-menu-item class="submenu" index="6-5" @click="toDataManagement()">实验成绩</el-menu-item>-->
                 </el-submenu>
               </el-menu>
             </el-row>

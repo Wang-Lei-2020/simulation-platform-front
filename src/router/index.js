@@ -9,6 +9,7 @@ import Experiment from "@/components/Experiment";
 import CourseManagement from "@/components/CourseManagement";
 import MyCourse from "@/components/MyCourse";
 import VueCookies from 'vue-cookies';
+import CourseStudy from "@/components/CourseStudy";
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -58,6 +59,11 @@ const routes = [
         path: '/myCourse',
         name: 'MyCourse',
         component: MyCourse
+    },
+    {
+        path: '/courseStudy',
+        name: 'CourseStudy',
+        component: CourseStudy
     }
 ];
 
