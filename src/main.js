@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
         next();
     }
     /*如果本地 存在 token 则 不允许直接跳转到 登录页面*/
-    if (to.fullPath == "/login") {
+    if (to.fullPath === "/login") {
         if (JSON.parse(localStorage.getItem('islogin'))) {
             next({
                 path: from.fullPath

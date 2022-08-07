@@ -37,7 +37,9 @@
           <el-col span="4">
             <el-row class="tac">
               <el-menu
-                  :default-active="this.activePath"
+                  v-if="this.$route.path !== '/' && this.$route.path !== '/register'"
+                  router
+                  :default-active="this.$router.path"
                   class="el-menu-vertical-demo"
                   @open="handleOpen"
                   @close="handleClose"
@@ -47,16 +49,17 @@
                     <i class="el-icon-s-tools"></i>
                     <span>系统设置</span>
                   </template>
-                  <el-menu-item v-if="getRole" class="submenu" index="4-1" @click="toUserList();saveNavState('4-1')">  系统用户</el-menu-item>
-                  <el-menu-item class="submenu" index="4-2" @click="toUserInfo();saveNavState('4-2')">  个人信息</el-menu-item>
+                      <el-menu-item v-if="getRole" class="submenu" index="/userList">  系统用户</el-menu-item>
+                      <el-menu-item class="submenu" index="/userInfo">  个人信息</el-menu-item>
+
                 </el-submenu>
                 <el-submenu index="5">
                   <template slot="title">
                     <i class="el-icon-s-custom"></i>
                     <span>虚拟仿真实验</span>
                   </template>
-                  <el-menu-item class="submenu" index="5-1" @click="toSceneView();saveNavState('5-1')">全景浏览</el-menu-item>
-                  <el-menu-item class="submenu" index="5-2" @click="toExperiment();saveNavState('5-2')">传感器安放</el-menu-item>
+                  <el-menu-item class="submenu" index="/sceneView">全景浏览</el-menu-item>
+                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>
                 </el-submenu>
 
                 <el-submenu index="6">
@@ -64,8 +67,8 @@
                     <i class="el-icon-s-data"></i>
                     <span>教学管理</span>
                   </template>
-                  <el-menu-item class="submenu" index="6-1" @click="toCourseManagement();saveNavState('6-1')">课程管理</el-menu-item>
-                  <el-menu-item v-if="!isTeacher" class="submenu" index="6-2" @click="toMyCourse();saveNavState('6-2')">我的课程</el-menu-item>
+                  <el-menu-item class="submenu" index="/courseManagement">课程管理</el-menu-item>
+                  <el-menu-item v-if="!isTeacher" class="submenu" index="/myCourse">我的课程</el-menu-item>
                   <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验教学</el-menu-item>
                   <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验考核</el-menu-item>
                   <el-menu-item class="submenu" index="6-5" @click="toDataManagement()">实验成绩</el-menu-item>
@@ -100,11 +103,7 @@ export default {
     return {
       activeIndex: "1",
       photoFlag:false,
-      activePath:"4-1"
     }
-  },
-  created() {
-    this.activePath = window.sessionStorage.getItem('activePath')
   },
   computed: {
     // 计算属性的 getter
@@ -191,41 +190,6 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    toUserList: function(){
-      if (this.$route.path !== "/userList") {
-        this.$router.push({name:"UserList",params:{isReload: 'true'}});
-      }
-    },
-    toUserInfo: function(){
-      if (this.$route.path !== "/userInfo") {
-        this.$router.push({name:"UserInfo",params:{isReload: 'true'}});
-      }
-    },
-    toSceneView: function () {
-      if (this.$route.path !== "/sceneView") {
-        this.$router.push({name:"SceneView",params:{isReload: 'true'}});
-      }
-    },
-    toExperiment: function () {
-      if (this.$route.path !== "/experiment") {
-        this.$router.push({name:"Experiment",params:{isReload: 'true'}});
-      }
-    },
-    toCourseManagement: function(){
-      if (this.$route.path !== "/courseManagement") {
-        this.$router.push({name:"CourseManagement",params:{isReload: 'true'}});
-      }
-    },
-    toMyCourse: function(){
-      if (this.$route.path !== "/myCourse") {
-        this.$router.push({name:"MyCourse",params:{isReload: 'true'}});
-      }
-    },
-    // 点击时，将子菜单的index存储在本地中，并使用在主菜单的default-active中，保持其状态
-    saveNavState: function (activePath){
-      window.sessionStorage.setItem('activePath', activePath)
-      this.activePath = activePath
-    }
   }
 }
 </script>
