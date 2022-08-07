@@ -9,7 +9,7 @@
 export default {
   name: "SceneView",
   created() {
-    if (this.$route.params.isReload == 'true') {
+    if (this.$route.params.isReload === 'true') {
       this.$router.go(0);
     }
   },
