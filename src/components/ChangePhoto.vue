@@ -5,7 +5,7 @@
           class="avatar-uploader"
           :multiple="false"
           :action="actionPath"
-          accept="image/jpeg,image/gif,image/png,image/bmp"
+          accept="image/jpeg,image/gif,image/png,image/bmp,.pdf"
           :before-upload="beforeAvatarUpload"
           :data="postData"
           :on-success="uploadSuccess">
@@ -37,7 +37,7 @@ export default {
       postData:{
         token:"",
       },
-      qiniuaddr: "http://quwn8qjnc.hb-bkt.clouddn.com",
+      qiniuaddr: "http://cdn.wanglei99.xyz",
       uploadPicUrl:"",
     };
   },
@@ -48,7 +48,7 @@ export default {
 
     var token;
     var policy = {};
-    var bucketName = 'wanglei2021';
+    var bucketName = 'wanglei2022';
     var AK ='hNl-AywgdWuBco20kCxR6rPMUB-uOV8Hlih7o_gI';
     var SK = 'LZOs_CcKGSsPac8krncFZFJU38Hgd6lCipLZli6x';
     var deadline = Math.round(new Date().getTime() / 1000) + 3600;
@@ -71,32 +71,13 @@ export default {
         withCredentials: true
       }).then(function (response) {
         // 这里是处理正确的回调
-        if (response.data.code === '503') {
-          // if (JSON.parse(localStorage.getItem('islogin'))) { //判断本地是否存在access_token
-          if (JSON.parse(Vue.$cookies.get('islogin'))) { //判断本地是否存在access_token
-            let flag = false;
-            _this.$store.commit('login', flag);
-            // localStorage.clear();
-            const cookies = Vue.$cookies.keys();
-            for (let i = 0; i < cookies.length; i++) {
-              Vue.$cookies.remove(cookies[i])
-            }
-
-            _this.$router.go(0);
-            _this.$message('您的登录已超时，请重新登录');
-          } else {
-            _this.$message(response.data.msg);
-          }
-        } else {
-          if (response.data.code === '0') {
-            // localStorage.setItem('userUrl', _this.uploadPicUrl)
-            Vue.$cookies.set('userUrl', _this.uploadPicUrl, "1D")
-            _this.$message({
-              message: '更改头像成功！',
-              type: 'success'
-            });
-            _this.$router.go(0)
-          }
+        if (response.data.code === '0') {
+          Vue.$cookies.set('logoImage', _this.uploadPicUrl, "1D")
+          _this.$message({
+            message: '更改头像成功！',
+            type: 'success'
+          });
+          _this.$router.go(0)
         }
       }).catch(function (response) {
         // 这里是处理错误的回调
@@ -113,6 +94,9 @@ export default {
       const isPNG = file.type === "image/png";
       const isJPEG = file.type === "image/jpeg";
       const isJPG = file.type === "image/jpg";
+      //可以上传pdf等文件
+      // let extension = file.name.substring(file.name.lastIndexOf('.')+1)
+      // const isPDF = extension === "pdf";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isPNG && !isJPEG && !isJPG) {
