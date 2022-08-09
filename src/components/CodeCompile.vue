@@ -1,15 +1,14 @@
 <template>
   <div>
-    <div class="codeInput">
+    <div class="codeInput" style="margin: 20px 30px 20px 30px">
       <el-input
           type="textarea"
           :rows="10"
-          placeholder="请输入内容"
+          placeholder="请输入代码"
           v-model="textarea">
-
       </el-input>
     </div>
-    <div class="compileConfirm">
+    <div class="compileConfirm" style="margin: 0 0 0 30px">
       <el-select v-model="value" placeholder="python">
         <el-option
             v-for="item in options"
@@ -18,10 +17,18 @@
             :value="item.value">
         </el-option>
       </el-select>
-      <el-button type="primary" @click="compile">运行</el-button>
+      <el-button type="primary" @click="compile" style="margin-left: 30px;width: 100px">运行</el-button>
     </div>
-    <div class="compileResult">
-      <p>{{this.compileResult}}</p>
+    <div class="compileResult" style="margin: 0 30px 0 30px">
+      <p>运行结果：</p>
+<!--      <p>{{this.compileResult}}</p>-->
+      <el-input
+          type="textarea"
+          :rows="7"
+          placeholder="运行结果..."
+          v-model="compileResult"
+          disabled>
+      </el-input>
     </div>
   </div>
 </template>
