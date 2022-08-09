@@ -9,7 +9,7 @@
       </el-input>
     </div>
     <div class="compileConfirm" style="margin: 0 0 0 30px">
-      <el-select v-model="value" placeholder="python">
+      <el-select v-model="value" placeholder="python" @change="filledInputWithJavaCode($event)">
         <el-option
             v-for="item in options"
             :key="item.value"
@@ -71,6 +71,13 @@ export default {
         // 这里是处理错误的回调
         console.log(response)
       })
+    },
+    filledInputWithJavaCode(value) {
+      if(value === "java"){
+        this.textarea='public class Solution {\n  public static void main(String[] args) {\n    \n  }\n}';
+      }else{
+        this.textarea='';
+      }
     }
   }
 }
