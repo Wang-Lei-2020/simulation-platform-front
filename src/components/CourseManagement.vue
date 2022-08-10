@@ -207,6 +207,7 @@ export default {
         Vue.$cookies.set('editedIntroduction',row.introduction, "1D")
         Vue.$cookies.set('editedCourseCredit',row.courseCredit, "1D")
         Vue.$cookies.set('editedCapacity',row.capacity, "1D")
+        Vue.$cookies.set('editedCourseFile',row.courseFile, "1D")
       }else{
         _this.$message({
           message: '只能编辑自己的课程！',

@@ -17,6 +17,19 @@
       <el-input type="number" v-model="ruleForm.capacity" placeholder="请输入课容量"></el-input>
     </el-form-item>
 
+    <el-form-item label="上传文件" prop="courseFile">
+      <el-upload
+          class="avatar-uploader"
+          :multiple="false"
+          :action="actionPath"
+          accept=".pdf"
+          :before-upload="beforeAvatarUpload"
+          :data="postData"
+          :on-success="uploadSuccess">
+        <i class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+    </el-form-item>
+
     <el-form-item>
       <el-button type="primary" @click="addCourse()">添加</el-button>
       <el-button type="danger" @click="reset" style="float: right;margin-right: 100px">重置</el-button>
@@ -27,6 +40,7 @@
 
 <script>
 import Vue from "vue";
+import {genUpToken} from "@/components/qiniuToken";
 
 export default {
   name: "AddCourse",
@@ -37,7 +51,8 @@ export default {
         courseTeacher: '',
         introduction:'',
         courseCredit:'',
-        capacity:''
+        capacity:'',
+        courseFile:''
       },
       rules: {
         courseName: [
@@ -55,7 +70,15 @@ export default {
         capacity: [
           { required: true, message: '请输入课容量', trigger: 'blur' }
         ],
-      }
+        courseFile: [
+          { required: true, message: '请上传文件', trigger: 'blur' }
+        ]
+      },
+      actionPath:'https://upload-z1.qiniup.com',
+      qiniuaddr: "http://cdn.wanglei99.xyz",
+      postData:{
+        token:"",
+      },
     }
   },
   created(){
@@ -63,8 +86,18 @@ export default {
       this.$router.push({name: 'Login', params: {isReload: 'true'}});
     }
 
-    // this.ruleForm.courseTeacher = localStorage.getItem('realName')
     this.ruleForm.courseTeacher = Vue.$cookies.get('realName')
+
+    var token;
+    var policy = {};
+    var bucketName = 'wanglei2022';
+    var AK ='hNl-AywgdWuBco20kCxR6rPMUB-uOV8Hlih7o_gI';
+    var SK = 'LZOs_CcKGSsPac8krncFZFJU38Hgd6lCipLZli6x';
+    var deadline = Math.round(new Date().getTime() / 1000) + 3600;
+    policy.scope = bucketName;
+    policy.deadline = deadline;
+    token = genUpToken(AK, SK, policy);
+    this.postData.token=token;
   },
   methods: {
     addCourse: function(){
@@ -98,11 +131,49 @@ export default {
       this.ruleForm.introduction = '';
       this.ruleForm.courseCredit = '';
       this.ruleForm.capacity = '';
-    }
+      this.ruleForm.courseFile = '';
+    },
+    beforeAvatarUpload(file) {
+      let extension = file.name.substring(file.name.lastIndexOf('.')+1)
+      const isPDF = extension === "pdf";
+      const isLt20M = file.size / 1024 / 1024 < 20;
+
+      if (!isPDF) {
+        this.$message.error("上传文件只能是 pdf 格式!");
+        return false;
+      }
+      if (!isLt20M) {
+        this.$message.error('上传文件大小不能超过 20MB!');
+      }
+      return (isPDF) && isLt20M;
+    },
+    uploadSuccess(response, file, fileList) {
+      console.log(fileList);
+      this.ruleForm.courseFile = `${this.qiniuaddr}/${response.key}`;
+      console.log(this.uploadPicUrl);
+      //在这里你就可以获取到上传到七牛的外链URL了
+    },
   }
 }
 </script>
 
 <style scoped>
-
+.avatar-uploader {
+  border: 2px dashed #d9d9d9;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 40px;
+  color: #8c939d;
+  width: 280px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
 </style>
