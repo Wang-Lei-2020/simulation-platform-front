@@ -20,7 +20,8 @@
         <el-input type="number" v-model="ruleForm.capacity" placeholder="请输入课容量"></el-input>
       </el-form-item>
       <el-form-item label="课程文件" prop="originalCourseFile">
-        <el-input type="text" v-model="originalCourseFile" placeholder="课程文件"></el-input>
+        <el-input type="text" v-model="originalCourseFile" placeholder="课程文件" style="width: 80%" disabled></el-input>
+        <a id="viewFile" :href="this.originalCourseFile" style="width: 20%;margin-left: 10px"> 预览 </a>
       </el-form-item>
 
       <el-form-item label="修改文件" prop="courseFile">
@@ -28,7 +29,7 @@
             class="avatar-uploader"
             :multiple="false"
             :action="actionPath"
-            accept=".pdf"
+            accept=".pdf,.doc,.docx,.txt"
             :before-upload="beforeAvatarUpload"
             :data="postData"
             :on-success="uploadSuccess">
@@ -150,6 +151,7 @@ export default {
       this.ruleForm.capacity= Vue.$cookies.get('editedCapacity')
       this.ruleForm.courseFile = Vue.$cookies.get('editedCourseFile')
       this.originalCourseFile = Vue.$cookies.get('editedCourseFile')
+
     },
     reset: function(){
       this.getCourseInfo()
@@ -157,16 +159,19 @@ export default {
     beforeAvatarUpload(file) {
       let extension = file.name.substring(file.name.lastIndexOf('.')+1)
       const isPDF = extension === "pdf";
+      const isDOC = extension === "doc";
+      const isDOCX = extension === "docx";
+      const isTXT = extension === "txt";
       const isLt20M = file.size / 1024 / 1024 < 20;
 
-      if (!isPDF) {
-        this.$message.error("上传文件只能是 pdf 格式!");
+      if (!isPDF && !isDOC && !isDOCX && !isTXT) {
+        this.$message.error("上传文件只能是 pdf/doc/docx/txt 格式!");
         return false;
       }
       if (!isLt20M) {
         this.$message.error('上传文件大小不能超过 20MB!');
       }
-      return (isPDF) && isLt20M;
+      return (isPDF|isDOC|isDOCX|isTXT) && isLt20M;
     },
     uploadSuccess(response, file, fileList) {
       console.log(fileList);

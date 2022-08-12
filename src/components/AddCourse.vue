@@ -22,7 +22,7 @@
           class="avatar-uploader"
           :multiple="false"
           :action="actionPath"
-          accept=".pdf"
+          accept=".pdf,.doc,.docx,.txt"
           :before-upload="beforeAvatarUpload"
           :data="postData"
           :on-success="uploadSuccess">
@@ -136,16 +136,19 @@ export default {
     beforeAvatarUpload(file) {
       let extension = file.name.substring(file.name.lastIndexOf('.')+1)
       const isPDF = extension === "pdf";
+      const isDOC = extension === "doc";
+      const isDOCX = extension === "docx";
+      const isTXT = extension === "txt";
       const isLt20M = file.size / 1024 / 1024 < 20;
 
-      if (!isPDF) {
-        this.$message.error("上传文件只能是 pdf 格式!");
+      if (!isPDF && !isDOC && !isDOCX && !isTXT) {
+        this.$message.error("上传文件只能是 pdf/doc/docx/txt 格式!");
         return false;
       }
       if (!isLt20M) {
         this.$message.error('上传文件大小不能超过 20MB!');
       }
-      return (isPDF) && isLt20M;
+      return (isPDF|isDOC|isDOCX|isTXT) && isLt20M;
     },
     uploadSuccess(response, file, fileList) {
       console.log(fileList);
