@@ -38,7 +38,17 @@ export default {
   name: "CodeCompile",
   data() {
     return {
-      textarea: '',
+      textarea: 'import numpy as np;\n' +
+          'import pandas as pd;\n' +
+          'from pandas import Series,DataFrame;\n' +
+          'from numpy import nan as NaN;\n' +
+          'data = DataFrame([[22,\'man\',\'18703188717\'],[12,\'man\',NaN],[19,\'woman\',NaN],[17,NaN,NaN],[NaN,NaN,NaN]],columns=[\'age\',\'sex\',\'phone\']);\n' +
+          '#data = data.dropna(axis=0, how=\'all\');#删除全部为NaN的行\n' +
+          '#data = data.dropna(axis=0, how=\'any\');#删除有NaN的行\n' +
+          '#data = data.dropna(axis=1, how=\'all\');#删除全部为NaN的列\n' +
+          '#data = data.fillna(0)#将NaN填充为0\n' +
+          'data = data.fillna({\'age\':20,\'sex\':233,\'phone\':666})#通过字典来填充，以实现对不同的列填充不同的值\n' +
+          'print(data);',
       options: [{
         value: 'python',
         label: 'python'
