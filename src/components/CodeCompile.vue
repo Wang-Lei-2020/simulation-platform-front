@@ -3,7 +3,7 @@
     <div class="codeInput" style="margin: 20px 30px 20px 30px">
       <el-input
           type="textarea"
-          :rows="10"
+          :rows="13"
           placeholder="请输入代码"
           v-model="textarea">
       </el-input>
@@ -21,7 +21,6 @@
     </div>
     <div class="compileResult" style="margin: 0 30px 0 30px">
       <p>运行结果：</p>
-<!--      <p>{{this.compileResult}}</p>-->
       <el-input
           type="textarea"
           :rows="7"

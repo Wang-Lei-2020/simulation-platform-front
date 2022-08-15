@@ -77,6 +77,7 @@ export default {
       actionPath:'https://upload-z1.qiniup.com',
       qiniuaddr: "http://cdn.wanglei99.xyz",
       postData:{
+        key:'',//文件名
         token:"",
       },
     }
@@ -134,6 +135,7 @@ export default {
       this.ruleForm.courseFile = '';
     },
     beforeAvatarUpload(file) {
+      this.postData.key = file.name
       let extension = file.name.substring(file.name.lastIndexOf('.')+1)
       const isPDF = extension === "pdf";
       const isDOC = extension === "doc";
