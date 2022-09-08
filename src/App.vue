@@ -34,7 +34,7 @@
       </el-header>
 
         <el-main v-if="getLoginState" class="main">
-          <el-col span="4">
+          <el-col :span="4">
             <el-row class="tac">
               <el-menu
                   v-if="this.$route.path !== '/' && this.$route.path !== '/register'"
@@ -70,6 +70,7 @@
                   <el-menu-item class="submenu" index="/courseManagement">课程管理</el-menu-item>
                   <el-menu-item v-if="!isTeacher" class="submenu" index="/myCourse">我的课程</el-menu-item>
                   <el-menu-item v-if="!isTeacher" class="submenu" index="/courseStudy">课程学习</el-menu-item>
+                  <el-menu-item v-if="!isTeacher" class="submenu" index="/coursePractice">课程练习</el-menu-item>
 <!--                  <el-menu-item class="submenu" index="6-3" @click="toDataManagement()">实验教学</el-menu-item>-->
 <!--                  <el-menu-item class="submenu" index="6-4" @click="toDataManagement()">实验考核</el-menu-item>-->
 <!--                  <el-menu-item class="submenu" index="6-5" @click="toDataManagement()">实验成绩</el-menu-item>-->
@@ -77,7 +78,7 @@
               </el-menu>
             </el-row>
           </el-col>
-          <el-col v-if="getLoginState" span="20">
+          <el-col v-if="getLoginState" :span="20">
             <router-view></router-view>
           </el-col>
         </el-main>

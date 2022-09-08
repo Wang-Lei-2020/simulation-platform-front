@@ -11,6 +11,7 @@ import MyCourse from "@/components/MyCourse";
 import VueCookies from 'vue-cookies';
 import CourseStudy from "@/components/CourseStudy";
 import CodeCompile from "@/components/CodeCompile";
+import CoursePractice from "@/components/CoursePractice";
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -70,6 +71,11 @@ const routes = [
         path: "/codeCompile",
         name: 'CodeCompile',
         component: CodeCompile
+    },
+    {
+        path: "/coursePractice",
+        name: 'CoursePractice',
+        component: CoursePractice
     }
 ];
 
