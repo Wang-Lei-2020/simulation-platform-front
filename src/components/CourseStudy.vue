@@ -394,7 +394,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" >
+<style lang="scss">
 
 .elMain{
   width:900px;

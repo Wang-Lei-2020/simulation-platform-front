@@ -9,6 +9,23 @@ import store from './store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Table, TableColumn, Pagination } from 'element-ui'
+import dataV from '@jiaminghi/data-view';
+// 引入全局css
+// import './assets/scss/style.scss';
+/// 按需引入vue-awesome图标
+import Icon from 'vue-awesome/components/Icon';
+import 'vue-awesome/icons/chart-bar.js';
+import 'vue-awesome/icons/chart-area.js';
+import 'vue-awesome/icons/chart-pie.js';
+import 'vue-awesome/icons/chart-line.js';
+import 'vue-awesome/icons/align-left.js';
+//引入echart
+//4.x 引用方式
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+// 全局注册
+Vue.component('icon', Icon);
+Vue.use(dataV);
 
 Vue.use(Table)
 Vue.use(TableColumn)

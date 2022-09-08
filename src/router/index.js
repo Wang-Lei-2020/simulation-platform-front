@@ -20,9 +20,13 @@ Vue.use(VueCookies)
 
 const routes = [
     {
+        // path: '/',
+        // name: 'Login',
+        // component: Login
+
         path: '/',
-        name: 'Login',
-        component: Login
+        name: 'index',
+        component: () => import('../views/index.vue')
     },
     {
         path: '/login',
