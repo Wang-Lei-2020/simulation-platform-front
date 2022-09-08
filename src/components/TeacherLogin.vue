@@ -43,9 +43,9 @@ export default {
     return {
       user: {},
       loginForm: {
-        userName: "",
-        password: "",
-        role: ""
+        userName: '',
+        password: '',
+        role: 'student'
       },
       rules: { //prop的名字必须和uer中的名字一样！！！
         userName: [
