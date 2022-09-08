@@ -34,7 +34,7 @@
       </el-header>
 
         <el-main v-if="getLoginState" class="main">
-          <el-col span="4">
+          <el-col :span="4">
             <el-row class="tac">
               <el-menu
                   v-if="this.$route.path !== '/' && this.$route.path !== '/register'"
@@ -78,7 +78,7 @@
               </el-menu>
             </el-row>
           </el-col>
-          <el-col v-if="getLoginState" span="20">
+          <el-col v-if="getLoginState" :span="20">
             <router-view></router-view>
           </el-col>
         </el-main>

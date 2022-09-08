@@ -15,7 +15,13 @@
         width="30%">
       <EditCourse></EditCourse>
     </el-dialog>
-
+    <el-dialog
+        title="上传习题"
+        :visible.sync="addExerciseFlag"
+        :before-close="handleClose"
+        width="30%">
+      <AddExercise></AddExercise>
+    </el-dialog>
     <div>
       <div class="search bar7" style="float: left">
         <el-form onsubmit="return false">
@@ -39,6 +45,18 @@
         <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button v-if="!isTeacher" size="mini" type="text" icon="el-icon-success" @click="selectCourse(scope.row.courseId)">选课</el-button>
+            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-upload2" @click="transAddExercise(scope.row)">上传习题</el-button>
+<!--            <el-upload-->
+<!--                v-if="isTeacher"-->
+<!--                class="avatar-uploader"-->
+<!--                :multiple="false"-->
+<!--                :action="ImportExercisePath"-->
+<!--                accept=".csv,.xls,.xlsx"-->
+<!--                :before-upload="beforeUpload"-->
+<!--                :data="{courseId:scope.row.courseId}"-->
+<!--                :on-success="uploadSuccess">-->
+<!--              <el-button size="mini" type="text" icon="el-icon-upload2">上传习题</el-button>-->
+<!--            </el-upload>-->
             <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-edit-outline" @click="editCourse(scope.row)">编辑</el-button>
             <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-delete-solid" @click="cancelCourse(scope.row)">删除</el-button>
           </template>
@@ -63,10 +81,11 @@
 import AddCourse from "@/components/AddCourse";
 import EditCourse from "@/components/EditCourse";
 import Vue from "vue";
+import AddExercise from "@/components/AddExercise";
 
 export default {
   name: "CourseManagement",
-  components:{EditCourse, AddCourse},
+  components:{AddExercise, EditCourse, AddCourse},
   data() {
     return{
       courseList:[],
@@ -78,8 +97,12 @@ export default {
         "from":0,
         "num":10,
       },
+      ImportExercisePath:"http://localhost:8081/exercise/uploadGroup",
+      chosenCourseId: 0,
+      //后端识别excel上传习题接口
       addCourseFlag: false,
       editCourseFlag: false,
+      addExerciseFlag: false,
     }
   },
   created() {
@@ -244,7 +267,12 @@ export default {
     },
     handleClose(done) {
       done();
+    },
+    transAddExercise:function (e){
+      this.addExerciseFlag = true
+      this.chosenCourseId = e.courseId
     }
+
   }
 }
 </script>
@@ -322,6 +350,14 @@ input {
   font-family: FontAwesome;
   color: #324b4e;
 }
+/*.avatar-uploader {*/
+/*  !*border: 2px dashed #d9d9d9;*!*/
+/*  !*border-radius: 10px;*!*/
+/*  cursor: pointer;*/
+/*  position: relative;*/
+/*  overflow: hidden;*/
+/*  width:80px;*/
+/*}*/
 </style>
 
 <style src="../font-awesome-4.7.0/css/font-awesome.min.css">

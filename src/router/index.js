@@ -13,6 +13,7 @@ import CourseStudy from "@/components/CourseStudy";
 import CodeCompile from "@/components/CodeCompile";
 import TeacherRegister from "@/components/TeacherRegister"
 import TeacherLogin from "@/components/TeacherLogin"
+import CoursePractice from "@/components/CoursePractice";
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -82,6 +83,11 @@ const routes = [
         path: "/TeacherLogin",
         name: 'TeacherLogin',
         component: TeacherLogin
+    },
+    {
+        path: "/coursePractice",
+        name: 'CoursePractice',
+        component: CoursePractice
     }
 ];
 

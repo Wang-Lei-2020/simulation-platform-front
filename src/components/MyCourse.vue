@@ -8,8 +8,9 @@
       <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />
       <el-table-column label="课容量" align="center" prop="capacity" width="90px" />
 
-      <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="195" class-name="small-padding fixed-width">
         <template slot-scope="scope">
+          <el-button size="mini" type="text" icon="el-icon-tickets" @click="enterExercise()">练习</el-button>
           <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse()">进入课程</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>
         </template>
@@ -80,6 +81,9 @@ export default {
     },
     selectCourse: function(/*row*/){
       this.$router.push("/courseStudy");
+    },
+    enterExercise: function (){
+      this.$router.push("/coursePractice")
     }
   }
 }
