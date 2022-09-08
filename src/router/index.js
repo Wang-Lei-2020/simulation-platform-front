@@ -11,6 +11,8 @@ import MyCourse from "@/components/MyCourse";
 import VueCookies from 'vue-cookies';
 import CourseStudy from "@/components/CourseStudy";
 import CodeCompile from "@/components/CodeCompile";
+import TeacherRegister from "@/components/TeacherRegister"
+import TeacherLogin from "@/components/TeacherLogin"
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -70,6 +72,16 @@ const routes = [
         path: "/codeCompile",
         name: 'CodeCompile',
         component: CodeCompile
+    },
+    {
+        path: "/TeacherRegister",
+        name: 'TeacherRegister',
+        component: TeacherRegister
+    },
+    {
+        path: "/TeacherLogin",
+        name: 'TeacherLogin',
+        component: TeacherLogin
     }
 ];
 

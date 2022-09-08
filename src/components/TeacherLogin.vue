@@ -15,17 +15,17 @@
               <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" clearable
                         size="medium" style="width: 90%"></el-input>
             </el-form-item>
-<!--            <el-form-item label="角色" prop="role" required>-->
-<!--              <el-select v-model="loginForm.role" placeholder="请选择角色" style="width: 90%">-->
-<!--                <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" >-->
-<!--                </el-option>-->
-<!--              </el-select>-->
-<!--            </el-form-item>-->
-<!--            <el-form-item label-width="0">-->
-<!--              <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>-->
-<!--              <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>-->
-<!--              <div class="clearBox"></div>-->
-<!--            </el-form-item>-->
+            <el-form-item label="角色" prop="role" required>
+              <el-select v-model="loginForm.role" placeholder="请选择角色" style="width: 90%">
+                <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" >
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label-width="0">
+              <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>
+              <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>
+              <div class="clearBox"></div>
+            </el-form-item>
           </el-form>
         </el-main>
         <el-aside width="30%"></el-aside>
