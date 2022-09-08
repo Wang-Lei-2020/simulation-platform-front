@@ -109,7 +109,7 @@ export default {
           Vue.$cookies.set("realName", response.data.data.realName, "1D");
           Vue.$cookies.set("phone", response.data.data.phone, "1D");
           Vue.$cookies.set("email", response.data.data.email, "1D");
-          Vue.$cookies.set("description", response.data.data.description, "1D");
+          // Vue.$cookies.set("description", response.data.data.description, "1D");
           Vue.$cookies.set("sex", response.data.data.sex, "1D");
           Vue.$cookies.set("role", response.data.data.role, "1D");
           if(response.data.data.logoImage != null){

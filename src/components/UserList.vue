@@ -16,14 +16,14 @@
       <el-table-column label="性别" align="center" prop="sex" fixed-width />
       <el-table-column label="邮箱" align="center" prop="email" fixed-width />
       <el-table-column label="电话" align="center" prop="phone" fixed-width />
-      <el-table-column label="描述" align="center" prop="description" fixed-width />
-      <el-table-column label="是否有效" align="center" prop="isActive" width="90">
-       <!-- 通过 slot-scope="scope" 接收数据 -->
-       <template slot-scope="scope">
-         <!-- scope.row 接收这一行数据 active-value: switch 打开时的值, inactive-value: switch 关闭时的值 -->
-         <el-switch v-model="scope.row.status" active-value="0" inactive-value="1"></el-switch>
-       </template>
-     </el-table-column>
+<!--      <el-table-column label="描述" align="center" prop="description" fixed-width />-->
+<!--      <el-table-column label="是否有效" align="center" prop="isActive" width="90">-->
+<!--       &lt;!&ndash; 通过 slot-scope="scope" 接收数据 &ndash;&gt;-->
+<!--       <template slot-scope="scope">-->
+<!--         &lt;!&ndash; scope.row 接收这一行数据 active-value: switch 打开时的值, inactive-value: switch 关闭时的值 &ndash;&gt;-->
+<!--         <el-switch v-model="scope.row.status" active-value="0" inactive-value="1"></el-switch>-->
+<!--       </template>-->
+<!--     </el-table-column>-->
 
      <el-table-column label="操作" align="center" width="180" class-name="small-padding fixed-width">
        <template>

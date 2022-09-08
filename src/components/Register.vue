@@ -43,10 +43,10 @@
                       size="medium" style="width: 90%"></el-input>
           </el-form-item>
 
-          <el-form-item label="描述" prop="description">
-            <el-input v-model="user.description" type="text" autocomplete="off" placeholder="请输入个人描述" clearable
-                      size="medium" style="width: 90%"></el-input>
-          </el-form-item>
+<!--          <el-form-item label="描述" prop="description">-->
+<!--            <el-input v-model="user.description" type="text" autocomplete="off" placeholder="请输入个人描述" clearable-->
+<!--                      size="medium" style="width: 90%"></el-input>-->
+<!--          </el-form-item>-->
 
           <el-form-item label="密码" prop="password" required>
             <el-input v-model="user.password" type="password" autocomplete="off" placeholder="请输入密码" clearable
@@ -84,7 +84,7 @@ export default {
         password: "",
         passwordChecked:"",
         phone: "",
-        description:"",
+        // description:"",
         validation:"",
       },
       sex:"",
@@ -197,7 +197,7 @@ export default {
       this.user.passwordChecked = "",
       this.user.phone = "";
       this.user.mobile = "";
-      this.user.description = "";
+      // this.user.description = "";
       this.$router.go(0);
     },
     acquireVal:function (telephone) {

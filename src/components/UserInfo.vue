@@ -47,10 +47,10 @@
             <el-input v-model="user.phone" type="tel" autocomplete="off" placeholder="请输入电话" clearable
                       size="medium" style="width: 90%"></el-input>
           </el-form-item>
-          <el-form-item label="描述" prop="description">
-            <el-input v-model="user.description" type="text" autocomplete="off" placeholder="请输入个人描述" clearable
-                      size="medium" style="width: 90%"></el-input>
-          </el-form-item>
+<!--          <el-form-item label="描述" prop="description">-->
+<!--            <el-input v-model="user.description" type="text" autocomplete="off" placeholder="请输入个人描述" clearable-->
+<!--                      size="medium" style="width: 90%"></el-input>-->
+<!--          </el-form-item>-->
           <el-form-item label="密码" prop="password" required>
             <el-input v-model="user.password" type="password" autocomplete="off" placeholder="请输入密码" disabled
                       size="medium" style="width: 90%"></el-input>
@@ -86,7 +86,7 @@ export default {
         email: "",
         password: "",
         phone: "",
-        description:"",
+        // description:"",
         role:"",
       },
       ChangePasswordFlag: false,
@@ -157,7 +157,7 @@ export default {
       this.user.password = Vue.$cookies.get('password');
       this.user.phone = Vue.$cookies.get('phone');
       this.user.email = Vue.$cookies.get('email');
-      this.user.description = Vue.$cookies.get('description');
+      // this.user.description = Vue.$cookies.get('description');
       this.user.sex = Vue.$cookies.get('sex');
       this.user.role = Vue.$cookies.get('role');
 
@@ -172,7 +172,7 @@ export default {
         "sex" : _this.user.sex,
         "email" : _this.user.email,
         "phone" : _this.user.phone,
-        "description" : _this.user.description
+        // "description" : _this.user.description
       }, {
         headers: {
           "Content-Type": "application/json;charset=utf-8"
@@ -193,7 +193,7 @@ export default {
         Vue.$cookies.set("realName",_this.user.realName, "1D");
         Vue.$cookies.set("email",_this.user.email, "1D");
         Vue.$cookies.set("phone",_this.user.phone, "1D");
-        Vue.$cookies.set("description",_this.user.description, "1D");
+        // Vue.$cookies.set("description",_this.user.description, "1D");
         Vue.$cookies.set("sex",_this.user.sex, "1D");
         Vue.$cookies.set("password",_this.user.password, "1D");
 
@@ -213,7 +213,7 @@ export default {
       this.user.email = "";
       this.user.phone = "";
       this.user.mobile = "";
-      this.user.description = "";
+      // this.user.description = "";
     },
     changePassword: function(){
       this.ChangePasswordFlag = true;
