@@ -29,7 +29,7 @@
           <button class="searchButton" @click="search()"></button>
         </el-form>
       </div>
-      <el-button v-if="isTeacher" type="primary" style="float:right;margin-right: 100px;margin-top: 12px" icon="el-icon-circle-plus" @click="addCourse()">添加课程</el-button>
+<!--      <el-button v-if="isTeacher" type="primary" style="float:right;margin-right: 100px;margin-top: 12px" icon="el-icon-circle-plus" @click="addCourse()">添加课程</el-button>-->
     </div>
 
     <div class="courseList">
@@ -57,8 +57,8 @@
 <!--                :on-success="uploadSuccess">-->
 <!--              <el-button size="mini" type="text" icon="el-icon-upload2">上传习题</el-button>-->
 <!--            </el-upload>-->
-            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-edit-outline" @click="editCourse(scope.row)">编辑</el-button>
-            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-delete-solid" @click="cancelCourse(scope.row)">删除</el-button>
+<!--            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-edit-outline" @click="editCourse(scope.row)">编辑</el-button>-->
+<!--            <el-button v-if="isTeacher" size="mini" type="text" icon="el-icon-delete-solid" @click="cancelCourse(scope.row)">删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>
