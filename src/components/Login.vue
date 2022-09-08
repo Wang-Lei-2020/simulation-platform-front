@@ -21,11 +21,11 @@
 <!--                </el-option>-->
 <!--              </el-select>-->
 <!--            </el-form-item>-->
-<!--            <el-form-item label-width="0">-->
-<!--              <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>-->
-<!--              <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>-->
-<!--              <div class="clearBox"></div>-->
-<!--            </el-form-item>-->
+            <el-form-item label-width="0">
+              <el-button type="primary" @click="onLogin" style="margin-left: 20%;width:100px">登录</el-button>
+              <el-button type="success" @click="toRegister" style="float: right;margin-right: 20%;width:100px">注册</el-button>
+              <div class="clearBox"></div>
+            </el-form-item>
           </el-form>
         </el-main>
         <el-aside width="30%"></el-aside>
