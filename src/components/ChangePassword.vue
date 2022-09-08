@@ -93,7 +93,7 @@ export default {
             "sex" : Vue.$cookies.get('sex'),
             "email" : Vue.$cookies.get('email'),
             "phone" : Vue.$cookies.get('phone'),
-            "description" : Vue.$cookies.get('description')
+            // "description" : Vue.$cookies.get('description')
           }, {
             headers: {
               "Content-Type": "application/json;charset=utf-8"
