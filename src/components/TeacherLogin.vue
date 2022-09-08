@@ -45,7 +45,7 @@ export default {
       loginForm: {
         userName: '',
         password: '',
-        role: 'student'
+        role: 'teacher'
       },
       rules: { //prop的名字必须和uer中的名字一样！！！
         userName: [
@@ -68,7 +68,11 @@ export default {
     }
   },
   created() {
-    if(Vue.$cookies.get("userName") !== null ) {
+    if(Vue.$cookies.get("role") === "student"){
+      this.$router.push({name: 'Login', params: {isReload: 'true'}});
+    }
+
+    if(Vue.$cookies.get("userName") !== null && Vue.$cookies.get("role") === "teacher") {
       this.$router.push({name: 'UserList', params: {isReload: 'true'}});
     }
 
@@ -92,16 +96,6 @@ export default {
       }).then(function (response) {
         // 这里是处理正确的回调
         if (response.data.code === '0') {
-          // _this.user = response.data.data;
-          // localStorage.setItem('userName', _this.loginForm.userName);
-          // localStorage.setItem('userId',response.data.data.userId);
-          // localStorage.setItem('password',_this.loginForm.password);
-          // localStorage.setItem('realName',response.data.data.realName);
-          // localStorage.setItem('phone',response.data.data.phone);
-          // localStorage.setItem('email',response.data.data.email);
-          // localStorage.setItem('description',response.data.data.description);
-          // localStorage.setItem('sex',response.data.data.sex);
-          // localStorage.setItem('role',response.data.data.role);
 
           Vue.$cookies.set("userName", _this.loginForm.userName, "1D");
           Vue.$cookies.set("userId", response.data.data.userId, "1D");
@@ -113,13 +107,10 @@ export default {
           Vue.$cookies.set("sex", response.data.data.sex, "1D");
           Vue.$cookies.set("role", response.data.data.role, "1D");
           if(response.data.data.logoImage != null){
-            // localStorage.setItem('logoImage',response.data.data.logoImage)
             Vue.$cookies.set("logoImage", response.data.data.logoImage, "1D");
           }else{
-            // localStorage.setItem('logoImage',"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png")
             Vue.$cookies.set("logoImage", "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png", "1D");
           }
-
 
           let flag = true;
           _this.$store.commit('login', flag);
@@ -136,6 +127,47 @@ export default {
       if (this.$route.path !== "/register") {
         this.$router.push("/register");
       }
+    },
+    onLogout: function () {
+      const _this = this;
+      this.$axios.post('/user/logout',{},{
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        withCredentials: true
+      }).then(function (response) {
+        // 这里是处理正确的回调
+        if(response.data.code === '503'){
+          _this.$message({
+            message: '您未登录！',
+            type: 'success'
+          });
+        }else{
+          if(response.data.code === '0'){
+            let flag = false;
+            _this.$store.commit('login', flag);
+            let role = Vue.$cookies.get('role');
+
+            const cookies = Vue.$cookies.keys();
+            for (let i = 0; i < cookies.length; i++) {
+              Vue.$cookies.remove(cookies[i])
+            }
+
+            console.log(_this.$route.path);
+            _this.$message({
+              message: '登出成功！',
+              type: 'success'
+            });
+            if(role === 'student')
+              _this.$router.push({name:"Login",params:{isReload: 'true',msg: '登出成功！'}});
+            else
+              _this.$router.push({name:"TeacherLogin",params:{isReload: 'true',msg: '登出成功！'}});
+          }
+        }
+      }).catch(function (response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
     },
   }
 }

@@ -11,26 +11,78 @@
 
     <el-container>
       <el-header class="header">
-        <el-menu
-            :default-active="activeIndex"
-            mode="horizontal"
-            background-color="#2F4F4F"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-          <el-menu-item index="1" style="margin-left: 4%">
-            <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo">川藏铁路虚拟仿真教学系统
-          </el-menu-item>
-          <el-submenu index="2" style="float: right;padding-right: 4%">
-            <template slot="title">
-              <el-avatar :src="getPhotoUrl"></el-avatar>
-              {{getUsername}}
-            </template>
-            <el-menu-item index="3-1" v-if="getLoginState" v-on:click="ChangePhoto">修改头像</el-menu-item>
-            <el-menu-item index="3-2" v-if="!getLoginState"  v-on:click="toLogin">登录</el-menu-item>
-            <el-menu-item index="3-3" v-if="getLoginState"  v-on:click="onLogout">注销</el-menu-item>
-            <el-menu-item index="3-4" v-if="!getLoginState" v-on:click="toRegister">注册</el-menu-item>
-          </el-submenu>
-        </el-menu>
+        <!-- 学生端系统的header -->
+        <el-row v-if="this.$route.path !== '/TeacherLogin' && this.$route.path !== '/TeacherRegister' && !isTeacher"
+                style="height: 100%; background-color: #324b4e; width: 100%;">
+          <el-col :span="2" style="min-height: 100%">
+          </el-col>
+          <el-col :span="5" style="min-height: 100%">
+            <el-col :span="3" style="min-height: 100%; min-width: 60px">
+              <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo">
+            </el-col>
+            <el-col :span="15" style="min-height: 100%">
+              <div style="color: gold; margin-top: 17px">
+                川藏铁路虚拟仿真教学系统
+              </div>
+            </el-col>
+          </el-col>
+          <el-col :span="4" style="min-height: 100%">
+            <div style="color: white; margin-top: 17px">
+              学生端系统
+            </div>
+          </el-col>
+          <el-col :span="9" style="min-height: 100%">
+          </el-col>
+          <el-col :span="2" style="min-height: 100%">
+            <el-menu v-if="getLoginState" style="background-color: transparent" mode="horizontal">
+                  <el-submenu index="1" style="float: left;">
+                    <template slot="title">
+                      <el-avatar :src="getPhotoUrl"></el-avatar>
+                      {{getUsername}}
+                    </template>
+                    <el-menu-item index="3-1" v-on:click="ChangePhoto">修改头像</el-menu-item>
+                    <el-menu-item index="3-3" v-on:click="onLogout">注销</el-menu-item>
+                  </el-submenu>
+            </el-menu>
+          </el-col>
+        </el-row>
+
+        <!-- 教师端系统的header -->
+        <el-row v-else
+                style="height: 100%; background-color: darkslateblue; width: 100%;">
+          <el-col :span="2" style="min-height: 100%">
+          </el-col>
+          <el-col :span="5" style="min-height: 100%">
+            <el-col :span="3" style="min-height: 100%; min-width: 60px">
+              <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo">
+            </el-col>
+            <el-col :span="15" style="min-height: 100%">
+              <div style="color: gold; margin-top: 17px">
+                川藏铁路虚拟仿真教学系统
+              </div>
+            </el-col>
+          </el-col>
+          <el-col :span="4" style="min-height: 100%">
+            <div style="color: white; margin-top: 17px">
+              教师端系统
+            </div>
+          </el-col>
+          <el-col :span="9" style="min-height: 100%">
+          </el-col>
+          <el-col :span="2" style="min-height: 100%">
+            <el-menu v-if="getLoginState" style="background-color: transparent" mode="horizontal">
+              <el-submenu index="1" style="float: left;">
+                <template slot="title">
+                  <el-avatar :src="getPhotoUrl"></el-avatar>
+                  {{getUsername}}
+                </template>
+                <el-menu-item index="3-1" v-on:click="ChangePhoto">修改头像</el-menu-item>
+                <el-menu-item index="3-3" v-on:click="onLogout">注销</el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </el-col>
+        </el-row>
+
       </el-header>
 
         <el-main v-if="getLoginState" class="main">
@@ -105,28 +157,23 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      photoFlag:false,
+      photoFlag:false
     }
   },
   computed: {
     // 计算属性的 getter
     getUsername: function () {
-      // if(localStorage.getItem('userName') == null){
       if(Vue.$cookies.get('userName') == null){
         return "未登录";
       }else{
-        // return localStorage.getItem('userName');
         return Vue.$cookies.get('userName');
       }
     },
     getLoginState: function (){
-      // return localStorage.getItem('userName') != null;
       return Vue.$cookies.get('userName') != null;
     },
     getPhotoUrl: function(){
-      // if(localStorage.getItem('logoImage') !== "null") {
       if(Vue.$cookies.get('logoImage') !== "null") {
-        // return localStorage.getItem('logoImage');
         return Vue.$cookies.get('logoImage');
       }
       else{
@@ -134,15 +181,14 @@ export default {
       }
     },
     getRole: function(){
-      // return localStorage.getItem('role') !== "student";
       return Vue.$cookies.get('role') !== "student";
     },
     isTeacher: function(){
-      // return localStorage.getItem('role') === "teacher";
       return Vue.$cookies.get('role') === "teacher";
     },
 
   },
+
   methods: {
     toLogin: function () {
       console.log(this.$route.path);
@@ -168,7 +214,8 @@ export default {
           if(response.data.code === '0'){
             let flag = false;
             _this.$store.commit('login', flag);
-            // localStorage.clear();
+            let role = Vue.$cookies.get('role');
+
             const cookies = Vue.$cookies.keys();
             for (let i = 0; i < cookies.length; i++) {
               Vue.$cookies.remove(cookies[i])
@@ -179,7 +226,10 @@ export default {
               message: '登出成功！',
               type: 'success'
             });
-            _this.$router.push({name:"Login",params:{isReload: 'true',msg: '登出成功！'}});
+            if(role === 'student')
+              _this.$router.push({name:"Login",params:{isReload: 'true',msg: '登出成功！'}});
+            else
+              _this.$router.push({name:"TeacherLogin",params:{isReload: 'true',msg: '登出成功！'}});
           }
         }
       }).catch(function (response) {
