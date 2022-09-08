@@ -10,7 +10,7 @@
       <h2 id="1">1 概述</h2>
 
       <h3 id="1.1">1.1 实验1：第一个天气预测项目</h3>
-      <iframe id = "testMsg" style = "width: 870px;height: 645px;" src = 'https://www.thingjs.com/s/776376f0de43375d608eebd2' ></iframe>
+      <iframe id = "testMsg" style = "width: 870px;height: 645px;" src = 'https://www.thingjs.com/pp/e7524801afe1e1271b939375' ></iframe>
       <br>
 
       <h3 id="1.2">1.2 数据预处理</h3>

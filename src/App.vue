@@ -40,7 +40,8 @@
                       <el-avatar :src="getPhotoUrl"></el-avatar>
                       {{getUsername}}
                     </template>
-                    <el-menu-item index="3-1" v-on:click="ChangePhoto">修改头像</el-menu-item>
+                    <el-menu-item index="3-1" v-on:click="toHome">主页</el-menu-item>
+                    <el-menu-item index="3-2" v-on:click="ChangePhoto">修改头像</el-menu-item>
                     <el-menu-item index="3-3" v-on:click="onLogout">注销</el-menu-item>
                   </el-submenu>
             </el-menu>
@@ -254,6 +255,11 @@ export default {
       console.log(this.$route.path);
       if (this.$route.path !== "/register") {
         this.$router.push({name:"Register",params:{isReload: 'true'}});
+      }
+    },
+    toHome: function () {
+      if (this.$route.path !== "/home") {
+        this.$router.push({name:"Home",params:{isReload: 'true'}});
       }
     },
     ChangePhoto: function(){

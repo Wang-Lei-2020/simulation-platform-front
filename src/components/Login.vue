@@ -112,7 +112,7 @@ export default {
 
           let flag = true;
           _this.$store.commit('login', flag);
-          _this.$router.push({name: 'UserList', params: {isReload: 'true'}});
+          _this.$router.push({name: 'Home', params: {isReload: 'true'}});
         }else{
           _this.$message.error(response.data.msg);
         }

@@ -14,19 +14,22 @@ import CodeCompile from "@/components/CodeCompile";
 import TeacherRegister from "@/components/TeacherRegister"
 import TeacherLogin from "@/components/TeacherLogin"
 import CoursePractice from "@/components/CoursePractice";
+import Home from "@/components/Home";
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
 
 const routes = [
     {
-        // path: '/',
-        // name: 'Login',
-        // component: Login
-
         path: '/',
-        name: 'index',
-        component: () => import('../views/index.vue')
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: Home
+        // component: () => import('../views/index.vue')
     },
     {
         path: '/login',
