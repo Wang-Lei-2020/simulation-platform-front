@@ -20,7 +20,7 @@
           <el-container>
             <el-main class="content_style" style="margin-right: 15px;">
               <el-container>
-                <el-header class="other_header" style="height: 40px;line-height: 40px;text-align: center; color:#5D9CEC ;">实验测试一</el-header>
+                <el-header class="other_header" style="height: 40px;line-height: 40px;text-align: center; color:#5D9CEC ;">实验练习一</el-header>
                 <el-main>
                   <el-row>
                     <el-row :class="`classabc${index+1}`" v-for="(item,index) in datalist" :key="index" style="margin-bottom: 20px;left:5%;">
@@ -66,10 +66,10 @@
       </el-col>
       <el-col span="6">
         <el-container style="margin-right: 50px;position: fixed;">
-          <el-header class="header_style" style="line-height: 40px;height: 40px;">测试</el-header>
+          <el-header class="header_style" style="line-height: 40px;height: 40px;">练习</el-header>
           <el-main class="content_style">
             <el-row style="margin-top: -15px;">
-              实验测试
+              实验练习
             </el-row>
             <el-row style="margin-top: 10px;">
               <el-button @click="Submit(index+1)" class="button_style" v-for="(item,index) in datalist" :key="index" :style="item.show">{{index+1}}</el-button>
