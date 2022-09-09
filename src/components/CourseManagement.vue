@@ -1,20 +1,20 @@
 <template>
   <div>
-    <el-dialog
-        title="添加课程"
-        :visible.sync="addCourseFlag"
-        :before-close="handleClose"
-        width="30%">
-      <AddCourse></AddCourse>
-    </el-dialog>
+<!--    <el-dialog-->
+<!--        title="添加课程"-->
+<!--        :visible.sync="addCourseFlag"-->
+<!--        :before-close="handleClose"-->
+<!--        width="30%">-->
+<!--      <AddCourse></AddCourse>-->
+<!--    </el-dialog>-->
 
-    <el-dialog
-        title="编辑课程"
-        :visible.sync="editCourseFlag"
-        :before-close="handleClose"
-        width="30%">
-      <EditCourse></EditCourse>
-    </el-dialog>
+<!--    <el-dialog-->
+<!--        title="编辑课程"-->
+<!--        :visible.sync="editCourseFlag"-->
+<!--        :before-close="handleClose"-->
+<!--        width="30%">-->
+<!--      <EditCourse></EditCourse>-->
+<!--    </el-dialog>-->
     <el-dialog
         title="上传习题"
         :visible.sync="addExerciseFlag"
@@ -22,6 +22,30 @@
         width="30%">
       <AddExercise></AddExercise>
     </el-dialog>
+
+    <h1 style="margin-left: 6px">我的课程</h1>
+
+    <div class="courseList" style="margin-top: 20px">
+      <el-table :data="myCourseList" border>
+        <el-table-column label="课程编号" align="center" prop="courseId" width="80px" />
+        <el-table-column label="课程名" align="center" prop="courseName" fixed-width />
+        <el-table-column label="课程介绍" align="center" prop="introduction" fixed-width />
+        <el-table-column label="授课教师" align="center" prop="courseTeacher" width="90px" />
+        <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />
+        <el-table-column label="课容量" align="center" prop="capacity" width="90px" />
+
+        <el-table-column label="操作" align="center" width="195" class-name="small-padding fixed-width">
+          <template slot-scope="scope">
+            <el-button size="mini" type="text" icon="el-icon-tickets" @click="enterExercise()">练习</el-button>
+            <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse()">进入课程</el-button>
+            <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <h1 style="margin-left: 6px; margin-top: 40px; margin-bottom: 5px">选课系统</h1>
+
     <div>
       <div class="search bar7" style="float: left">
         <el-form onsubmit="return false">
@@ -78,14 +102,15 @@
 </template>
 
 <script>
-import AddCourse from "@/components/AddCourse";
-import EditCourse from "@/components/EditCourse";
+// import AddCourse from "@/components/AddCourse";
+// import EditCourse from "@/components/EditCourse";
 import Vue from "vue";
 import AddExercise from "@/components/AddExercise";
 
 export default {
   name: "CourseManagement",
-  components:{AddExercise, EditCourse, AddCourse},
+  // components:{AddExercise, EditCourse, AddCourse},
+  components:{AddExercise},
   data() {
     return{
       courseList:[],
@@ -103,6 +128,7 @@ export default {
       addCourseFlag: false,
       editCourseFlag: false,
       addExerciseFlag: false,
+      myCourseList:[]
     }
   },
   created() {
@@ -114,6 +140,11 @@ export default {
       this.$router.go(0);
     }
     this.getCourseList();
+
+    if (this.$route.params.isReload === 'true') {
+      this.$router.go(0);
+    }
+    this.getMyCourseList();
   },
   computed: {
     isTeacher: function(){
@@ -216,14 +247,8 @@ export default {
     },
     editCourse: function(row){
       const _this = this;
-      // if(row.courseTeacher === localStorage.getItem('realName')){
       if(row.courseTeacher === Vue.$cookies.get('realName')){
         this.editCourseFlag = true
-        // localStorage.setItem('editedCourseId',row.courseId)
-        // localStorage.setItem('editedCourseName',row.courseName)
-        // localStorage.setItem('editedIntroduction',row.introduction)
-        // localStorage.setItem('editedCourseCredit',row.courseCredit)
-        // localStorage.setItem('editedCapacity',row.capacity)
 
         Vue.$cookies.set('editedCourseId',row.courseId, "1D")
         Vue.$cookies.set('editedCourseName',row.courseName, "1D")
@@ -271,7 +296,50 @@ export default {
     transAddExercise:function (e){
       this.addExerciseFlag = true
       this.chosenCourseId = e.courseId
-    }
+    },
+    getMyCourseList: function(){
+      const _this = this;
+      let formData = new FormData;
+      // formData.append('userId',localStorage.getItem('userId'));
+      formData.append('userId',Vue.$cookies.get('userId'));
+
+      this.$axios.post('/course/myCourseList', formData, {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        withCredentials: true
+      }).then(function (response) {
+        // 这里是处理正确的回调
+        _this.myCourseList= response.data.data;
+      }).catch(function (response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
+    },
+    deletePickCourse: function(row){
+      const _this = this;
+      // this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':localStorage.getItem('userId')}, {
+      this.$axios.post('/course/deletePickCourse', {'courseId':row.courseId,'userId':Vue.$cookies.get('userId')}, {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        withCredentials: true
+      }).then(function () {
+        // 这里是处理正确的回调
+        _this.$message({
+          message: '退课成功！',
+          type: 'success'
+        });
+        _this.$router.go(0)
+      }).catch(function (response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
+    },
+    enterExercise: function (){
+      this.$router.push("/coursePractice")
+    },
+
 
   }
 }

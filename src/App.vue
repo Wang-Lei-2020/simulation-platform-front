@@ -16,9 +16,9 @@
                 style="height: 100%; background-color: #324b4e; width: 100%;">
           <el-col :span="2" style="min-height: 100%">
           </el-col>
-          <el-col :span="5" style="min-height: 100%">
+          <el-col :span="5" style="min-height: 100%" >
             <el-col :span="3" style="min-height: 100%; min-width: 60px">
-              <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo">
+              <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo" @click="toHome">
             </el-col>
             <el-col :span="15" style="min-height: 100%">
               <div style="color: gold; margin-top: 17px">
@@ -97,27 +97,29 @@
                   @open="handleOpen"
                   @close="handleClose"
               >
-
-                <el-submenu v-if="!isTeacher" index="4">
+                <el-menu-item class="submenu" index="/sceneView">
                   <template slot="title">
-                    <i class="el-icon-s-custom"></i>
-                    <span>虚拟仿真实验</span>
+                    <i class="el-icon-location-outline"></i>
+                    <span>全景浏览</span>
                   </template>
-                  <el-menu-item class="submenu" index="/sceneView">全景浏览</el-menu-item>
-                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>
-                </el-submenu>
+                </el-menu-item>
 
                 <el-submenu v-if="!isTeacher" index="5">
                   <template slot="title">
-                    <i class="el-icon-s-data"></i>
-                    <span>学习活动</span>
+                    <i class="el-icon-s-custom"></i>
+                    <span>基础知识</span>
                   </template>
-                  <el-menu-item class="submenu" index="/courseManagement">选课</el-menu-item>
-                  <el-menu-item class="submenu" index="/myCourse">我的课程</el-menu-item>
-                  <el-menu-item class="submenu" index="/courseStudy">课程学习</el-menu-item>
+                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>
                 </el-submenu>
 
-                <el-submenu v-if="isTeacher" index="5">
+                <el-menu-item class="submenu" index="/courseStudy">
+                  <template slot="title">
+                    <i class="el-icon-edit"></i>
+                    <span>课程学习</span>
+                  </template>
+                </el-menu-item>
+
+                <el-submenu v-if="isTeacher" index="6">
                   <template slot="title">
                     <i class="el-icon-s-data"></i>
                     <span>教学管理</span>
@@ -125,12 +127,18 @@
                   <el-menu-item class="submenu" index="/courseManagement">课程管理</el-menu-item>
                 </el-submenu>
 
-                <el-submenu index="6">
+                <el-menu-item class="submenu" index="/courseManagement">
+                  <template slot="title">
+                    <i class="el-icon-s-data"></i>
+                    <span>课程选课</span>
+                  </template>
+                </el-menu-item>
+
+                <el-submenu index="7">
                   <template slot="title">
                     <i class="el-icon-s-tools"></i>
                     <span>系统设置</span>
                   </template>
-<!--                  <el-menu-item v-if="getRole" class="submenu" index="/userList">系统用户</el-menu-item>-->
                   <el-menu-item class="submenu" index="/userInfo">  个人信息</el-menu-item>
                 </el-submenu>
               </el-menu>
@@ -258,8 +266,8 @@ export default {
       }
     },
     toHome: function () {
-      if (this.$route.path !== "/home") {
-        this.$router.push({name:"Home",params:{isReload: 'true'}});
+      if (this.$route.path !== "/view") {
+        this.$router.push({name:"View",params:{isReload: 'true'}});
       }
     },
     ChangePhoto: function(){
