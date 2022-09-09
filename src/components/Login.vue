@@ -72,7 +72,7 @@ export default {
       this.$router.push({name: 'TeacherLogin', params: {isReload: 'true'}});
     }
     if(Vue.$cookies.get("userName") !== null && Vue.$cookies.get("role") === "student") {
-      this.$router.push({name: 'UserList', params: {isReload: 'true'}});
+      this.$router.push({name: 'View', params: {isReload: 'true'}});
     }
 
     if (this.$route.params.isReload === 'true') {
@@ -112,7 +112,7 @@ export default {
 
           let flag = true;
           _this.$store.commit('login', flag);
-          _this.$router.push({name: 'Home', params: {isReload: 'true'}});
+          _this.$router.push({name: 'View', params: {isReload: 'true'}});
         }else{
           _this.$message.error(response.data.msg);
         }
