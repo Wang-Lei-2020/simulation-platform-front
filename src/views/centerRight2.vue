@@ -5,7 +5,7 @@
         <span>
           <icon name="align-left" class="text-icon"></icon>
         </span>
-        <span class="fs-xl text mx-2">产品销售渠道分析</span>
+        <span class="fs-xl text mx-2" style="font-size: 18px">我的课程进度</span>
       </div>
       <div class="d-flex ai-center flex-column body-box">
         <dv-capsule-chart class="dv-cap-chart" :config="config" />
@@ -24,24 +24,24 @@ export default {
       config: {
         data: [
           {
-            name: '南阳',
-            value: 167
+            name: '数据库',
+            value: 100
           },
           {
-            name: '周口',
+            name: '数据结构',
             value: 67
           },
           {
-            name: '漯河',
-            value: 123
+            name: '软件测试',
+            value: 60
           },
           {
-            name: '郑州',
-            value: 55
+            name: '网站开发',
+            value: 54
           },
           {
-            name: '西峡',
-            value: 98
+            name: '计算机网络',
+            value: 75
           }
         ]
       }

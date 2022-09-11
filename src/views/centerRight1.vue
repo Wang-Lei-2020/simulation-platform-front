@@ -6,7 +6,7 @@
           <icon name="chart-line" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">任务完成排行榜</span>
+          <span class="fs-xl text mx-2" style="font-size: 18px">最近登录的用户</span>
         </div>
       </div>
       <div class="d-flex jc-center body-box">
@@ -21,21 +21,21 @@ export default {
   data() {
     return {
       config: {
-        header: ['组件', '分支', '覆盖率'],
+        header: ['用户名', 'ip地址', '时间'],
         data: [
-          ['组件1', 'dev-1', "<span  class='colorGrass'>↑75%</span>"],
-          ['组件2', 'dev-2', "<span  class='colorRed'>↓33%</span>"],
-          ['组件3', 'dev-3', "<span  class='colorGrass'>↑100%</span>"],
-          ['组件4', 'rea-1', "<span  class='colorGrass'>↑94%</span>"],
-          ['组件5', 'rea-2', "<span  class='colorGrass'>↑95%</span>"],
-          ['组件6', 'fix-2', "<span  class='colorGrass'>↑63%</span>"],
-          ['组件7', 'fix-4', "<span  class='colorGrass'>↑84%</span>"],
-          ['组件8', 'fix-7', "<span  class='colorRed'>↓46%</span>"],
-          ['组件9', 'dev-2', "<span  class='colorRed'>↓13%</span>"],
-          ['组件10', 'dev-9', "<span  class='colorGrass'>↑76%</span>"]
+          ['王磊', '北京', "<span  class='colorGrass'>5秒前</span>"],
+          ['张星宇', '北京', "<span  class='colorRed'>16秒前</span>"],
+          ['小黄', '上海', "<span  class='colorGrass'>30秒前</span>"],
+          ['小绿', '广西', "<span  class='colorGrass'>1分钟前</span>"],
+          ['小蓝', '广东', "<span  class='colorGrass'>1分钟前</span>"],
+          ['小紫', '河北', "<span  class='colorGrass'>2分钟前</span>"],
+          ['小粉', '山西', "<span  class='colorGrass'>2分钟前</span>"],
+          ['小明', '天津', "<span  class='colorRed'>2分钟前</span>"],
+          ['小橙', '重庆', "<span  class='colorRed'>3分钟前</span>"],
+          ['小白', '云南', "<span  class='colorGrass'>3分钟前</span>"]
         ],
         rowNum: 7, //表格行数
-        headerHeight: 35,
+        headerHeight: 25,
         headerBGC: '#0f1325', //表头
         oddRowBGC: '#0f1325', //奇数行
         evenRowBGC: '#171c33', //偶数行

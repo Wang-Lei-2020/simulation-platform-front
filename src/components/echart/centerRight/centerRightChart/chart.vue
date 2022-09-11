@@ -33,7 +33,7 @@ export default {
         let lineStyle = {
           normal: {
             width: 1,
-            opacity: 0.5
+            opacity: 1
           }
         };
 
@@ -42,7 +42,7 @@ export default {
             indicator: newData.indicatorData,
             shape: "circle",
             splitNumber: 5,
-            radius: ["0%", "65%"],
+            radius: ["20%", "65%"],
             name: {
               textStyle: {
                 color: "rgb(238, 197, 102)"
@@ -70,23 +70,23 @@ export default {
             }
           },
           series: [
-            {
-              name: "北京",
-              type: "radar",
-              lineStyle: lineStyle,
-              data: newData.dataBJ,
-              symbol: "none",
-              itemStyle: {
-                normal: {
-                  color: "#F9713C"
-                }
-              },
-              areaStyle: {
-                normal: {
-                  opacity: 0.1
-                }
-              }
-            },
+            // {
+            //   name: "北京",
+            //   type: "radar",
+            //   lineStyle: lineStyle,
+            //   data: newData.dataBJ,
+            //   symbol: "none",
+            //   itemStyle: {
+            //     normal: {
+            //       color: "#F9713C"
+            //     }
+            //   },
+            //   areaStyle: {
+            //     normal: {
+            //       opacity: 0.1
+            //     }
+            //   }
+            // },
             {
               name: "上海",
               type: "radar",
@@ -100,27 +100,27 @@ export default {
               },
               areaStyle: {
                 normal: {
-                  opacity: 0.05
+                  opacity: 0.8
                 }
               }
             },
-            {
-              name: "广州",
-              type: "radar",
-              lineStyle: lineStyle,
-              data: newData.dataGZ,
-              symbol: "none",
-              itemStyle: {
-                normal: {
-                  color: "rgb(238, 197, 102)"
-                }
-              },
-              areaStyle: {
-                normal: {
-                  opacity: 0.05
-                }
-              }
-            } //end
+            // {
+            //   name: "广州",
+            //   type: "radar",
+            //   lineStyle: lineStyle,
+            //   data: newData.dataGZ,
+            //   symbol: "none",
+            //   itemStyle: {
+            //     normal: {
+            //       color: "rgb(238, 197, 102)"
+            //     }
+            //   },
+            //   areaStyle: {
+            //     normal: {
+            //       opacity: 0.05
+            //     }
+            //   }
+            // } //end
           ]
         }
       },
