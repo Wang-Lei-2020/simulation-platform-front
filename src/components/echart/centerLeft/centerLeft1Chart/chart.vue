@@ -3,8 +3,8 @@
     <Echart
       :options="options"
       id="centreLeft1Chart"
-      height="220px"
-      width="260px"
+      height="300px"
+      width="300px"
     ></Echart>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
           ],
           tooltip: {
             trigger: "item",
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: "{a} <br/>{b} : {c}h ({d}%)"
           },
           toolbox: {
             show: true
@@ -51,21 +51,22 @@ export default {
           legend: {
             orient: "horizontal",
             icon: "circle",
-            bottom: 0,
+            bottom:20,
             x: "center",
             data: newData.xData,
             textStyle: {
-              color: "#fff"
+              color: "#fff",
+              fontSize:18
             }
           },
           series: [
             {
-              name: "通过率统计",
+              name: "学习占比统计",
               type: "pie",
-              radius: [10, 50],
+              radius: [8, 42],
               roseType: "area",
-              center: ["50%", "40%"],
-              data: newData.seriesData
+              center: ["50%", "30%"],
+              data: newData.seriesData,
             }
           ]
         }

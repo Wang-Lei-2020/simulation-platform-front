@@ -8,7 +8,7 @@
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">大数据可视化平台</span>
+              <span class="title-text">学习数据可视化平台</span>
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
@@ -27,21 +27,21 @@
         <!-- 第二行 -->
         <div class="d-flex jc-between px-2">
           <div class="d-flex aside-width">
-            <div class="react-left ml-4 react-l-s">
+            <div >
               <span class="react-left"></span>
-              <span class="text">数据分析1</span>
+              <span class="text"></span>
             </div>
-            <div class="react-left ml-3">
-              <span class="text">数据分析2</span>
+            <div>
+              <span class="text"></span>
             </div>
           </div>
           <div class="d-flex aside-width">
             <div class="react-right bg-color-blue mr-3">
-              <span class="text fw-b">vue-big-screen</span>
+              <span class="text fw-b" style="font-size: 22px">学生端</span>
             </div>
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
-              <span class="text"
+              <span class="text" style="font-size: 25px"
                 >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
               >
             </div>
@@ -52,15 +52,15 @@
           <!-- 第三行数据 -->
           <div class="content-box">
             <div>
-              <dv-border-box-12>
+              <dv-border-box-12 style="width: 500px">
                 <centerLeft1 />
               </dv-border-box-12>
             </div>
-            <div>
-              <dv-border-box-12>
-                <centerLeft2 />
-              </dv-border-box-12>
-            </div>
+<!--            <div>-->
+<!--              <dv-border-box-12>-->
+<!--                <centerLeft2 />-->
+<!--              </dv-border-box-12>-->
+<!--            </div>-->
             <!-- 中间 -->
             <div>
               <center />
@@ -95,7 +95,7 @@
 import drawMixin from "../utils/drawMixin";
 import { formatTime } from '@/utils'
 import centerLeft1 from './centerLeft1'
-import centerLeft2 from './centerLeft2'
+// import centerLeft2 from './centerLeft2'
 import centerRight1 from './centerRight1'
 import centerRight2 from './centerRight2'
 import center from './center'
@@ -117,7 +117,7 @@ export default {
   },
   components: {
     centerLeft1,
-    centerLeft2,
+    // centerLeft2,
     centerRight1,
     centerRight2,
     center,

@@ -45,9 +45,10 @@ export default {
           legend: {
             data: ["已学习", "计划学习", "完成率"],
             textStyle: {
-              color: "#B4B4B4"
+              color: "#B4B4B4",
+              fontSize: 18
             },
-            top: "0%"
+            top: "5%"
           },
           grid: {
             x: "8%",

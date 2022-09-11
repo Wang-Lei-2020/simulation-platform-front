@@ -111,34 +111,35 @@ export default {
             subtext: newData.year + '/' + newData.weekCategory[6],
             subtextStyle: {
               color: '#fff',
-              fontSize: 16
+              fontSize: 20
             },
-            top: 50,
-            left: 80
+            top: 40,
+            left: 140
           },
           legend: {
-            top: 120,
-            left: 80,
+            top: 100,
+            left: 140,
             orient: 'vertical',
-            itemGap: 15,
-            itemWidth: 12,
-            itemHeight: 12,
+            itemGap: 18,
+            itemWidth: 18,
+            itemHeight: 18,
             data: ['平均指标', '我的指标'],
             textStyle: {
               color: '#fff',
-              fontSize: 14
+              fontSize: 18
             }
           },
           tooltip: {
             trigger: 'item'
           },
           radar: {
-            center: ['68%', '27%'],
+            center: ['60%', '27%'],
             radius: '40%',
             name: {
-              color: '#fff'
+              color: '#fff',
+              fontSize:16
             },
-            splitNumber: 8,
+            splitNumber: 6,
             axisLine: {
               lineStyle: {
                 color: this.colorList.linearYtoG,
@@ -158,7 +159,7 @@ export default {
                 shadowBlur: 25,
                 shadowColor: '#000',
                 shadowOffsetX: 0,
-                shadowOffsetY: 5
+                shadowOffsetY: 5,
               }
             },
             indicator: [
@@ -168,7 +169,7 @@ export default {
               },
               {
                 name: '登录次数',
-                max: 6
+                max: 4
               },
               {
                 name: '学习效率',
@@ -176,7 +177,7 @@ export default {
               },
               {
                 name: '完成项目',
-                max: 4
+                max: 6
               }
             ]
           },
@@ -184,7 +185,7 @@ export default {
             left: 90,
             right: 80,
             bottom: 40,
-            top: '60%'
+            top: '55%'
           },
           xAxis: {
             type: 'category',
@@ -192,7 +193,7 @@ export default {
             axisLine: true,
             axisLabel: {
               color: 'rgba(255,255,255,.8)',
-              fontSize: 15
+              fontSize: 18
             },
             data: newData.weekCategory
           },
@@ -221,7 +222,7 @@ export default {
             },
             axisLabel: {
               color: 'rgba(255,255,255,.8)',
-              fontSize: 15
+              fontSize: 18
             }
           },
           series: [
@@ -235,7 +236,7 @@ export default {
                   name: '平均指标',
                   itemStyle: {
                     normal: {
-                      color: '#f8d351'
+                      color: '#f8d351',
                     }
                   },
                   lineStyle: {
@@ -315,7 +316,8 @@ export default {
                 precision: 0,
                 label: {
                   normal: {
-                    formatter: '平均值: \n {c}'
+                    formatter: '平均值: \n {c}',
+                    fontSize:18
                   }
                 },
                 lineStyle: {

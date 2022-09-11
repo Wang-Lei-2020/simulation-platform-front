@@ -6,30 +6,30 @@
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">任务通过率</span>
+          <span class="fs-xl text mx-2" style="font-size: 18px">模块学习占比</span>
           <dv-decoration-3 class="dv-dec-3" />
         </div>
       </div>
       <div class="d-flex jc-center">
-        <CenterLeft1Chart />
+        <CenterLeft1Chart style="margin-top: 20px" />
       </div>
       <!-- 4个主要的数据 -->
-      <div class="bottom-data">
-        <div
-          class="item-box mt-2"
-          v-for="(item, index) in numberData"
-          :key="index"
-        >
-          <div class="d-flex">
-            <span class="coin">￥</span>
-            <dv-digital-flop class="dv-digital-flop" :config="item.number" />
-          </div>
-          <p class="text" style="text-align: center;">
-            {{ item.text }}
-            <span class="colorYellow">(件)</span>
-          </p>
-        </div>
-      </div>
+<!--      <div class="bottom-data">-->
+<!--        <div-->
+<!--          class="item-box mt-2"-->
+<!--          v-for="(item, index) in numberData"-->
+<!--          :key="index"-->
+<!--        >-->
+<!--          <div class="d-flex">-->
+<!--            <span class="coin">￥</span>-->
+<!--            <dv-digital-flop class="dv-digital-flop" :config="item.number" />-->
+<!--          </div>-->
+<!--          <p class="text" style="text-align: center;">-->
+<!--            {{ item.text }}-->
+<!--            <span class="colorYellow">(件)</span>-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -39,56 +39,56 @@ import CenterLeft1Chart from '@/components/echart/centerLeft/centerLeft1Chart'
 export default {
   data() {
     return {
-      numberData: [
-        {
-          number: {
-            number: [15],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '今日构建总量'
-        },
-        {
-          number: {
-            number: [1144],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '总共完成数量'
-        },
-        {
-          number: {
-            number: [361],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '正在编译数量'
-        },
-        {
-          number: {
-            number: [157],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '未通过数量'
-        }
-      ]
+      // numberData: [
+      //   {
+      //     number: {
+      //       number: [15],
+      //       toFixed: 1,
+      //       textAlign: 'left',
+      //       content: '{nt}',
+      //       style: {
+      //         fontSize: 24
+      //       }
+      //     },
+      //     text: '今日构建总量'
+      //   },
+      //   {
+      //     number: {
+      //       number: [1144],
+      //       toFixed: 1,
+      //       textAlign: 'left',
+      //       content: '{nt}',
+      //       style: {
+      //         fontSize: 24
+      //       }
+      //     },
+      //     text: '总共完成数量'
+      //   },
+      //   {
+      //     number: {
+      //       number: [361],
+      //       toFixed: 1,
+      //       textAlign: 'left',
+      //       content: '{nt}',
+      //       style: {
+      //         fontSize: 24
+      //       }
+      //     },
+      //     text: '正在编译数量'
+      //   },
+      //   {
+      //     number: {
+      //       number: [157],
+      //       toFixed: 1,
+      //       textAlign: 'left',
+      //       content: '{nt}',
+      //       style: {
+      //         fontSize: 24
+      //       }
+      //     },
+      //     text: '未通过数量'
+      //   }
+      // ]
     }
   },
   components: {
@@ -101,7 +101,7 @@ export default {
     changeTiming() {
       setInterval(() => {
         this.changeNumber()
-      }, 3000)
+      }, 5000)
     },
     changeNumber() {
       this.numberData.forEach((item, index) => {
@@ -118,7 +118,7 @@ export default {
 @import '../assets/scss/style';
 @import '../assets/scss/variables';
 
-$box-width: 300px;
+$box-width: 500px;
 $box-height: 410px;
 
 #centerLeft1 {
