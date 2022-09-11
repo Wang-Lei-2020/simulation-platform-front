@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute; left: 635px; top: 273px">
+  <div style="position: absolute; left: 559px; top: 241px;">
     <Index></Index>
   </div>
 </template>

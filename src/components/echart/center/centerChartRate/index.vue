@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 通过率/达标率 -->
+    <!-- 练习正确率 -->
     <Echart
       :options="options"
       :id="id"
