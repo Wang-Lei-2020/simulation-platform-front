@@ -26,7 +26,7 @@
                 <el-card class="box-card" style="width: 200px">
                   <div slot="header" class="clearfix">
                     <span>传感器</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    <el-button style="float: right; padding: 3px 0" type="text" disabled>已选课</el-button>
                   </div>
                 </el-card>
               </el-col>
@@ -102,7 +102,10 @@
                 <el-card class="box-card" style="width: 200px">
                   <div slot="header" class="clearfix">
                     <span>嵌入式编程</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    <el-tooltip class="item" effect="dark" placement="top-start">
+                      <div slot="content">请完成以下课程的学习：<br/>C语言程序设计</div>
+                      <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    </el-tooltip>
                   </div>
                 </el-card>
               </el-col>
@@ -115,7 +118,10 @@
                 <el-card class="box-card" style="width: 200px">
                   <div slot="header" class="clearfix">
                     <span>计算机网络</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    <el-tooltip class="item" effect="dark" placement="top-start">
+                      <div slot="content">请完成以下课程的学习：<br/>面向对象编程原理、计算机组成原理</div>
+                      <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    </el-tooltip>
                   </div>
                 </el-card>
               </el-col>
@@ -143,7 +149,10 @@
                 <el-card class="box-card" style="width: 220px">
                   <div slot="header" class="clearfix">
                     <span>综合实训1</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    <el-tooltip class="item" effect="dark" placement="top-start">
+                      <div slot="content">请完成以下课程的学习：<br/>嵌入式编程、计算机网络</div>
+                      <el-button style="float: right; padding: 3px 0" type="text">选课</el-button>
+                    </el-tooltip>
                   </div>
                   <div>
                     基于ARIMA的天气预测平台
