@@ -4,6 +4,8 @@
 <!--      <el-breadcrumb-item :to="{ path: '/resources' }">组件库</el-breadcrumb-item>-->
 <!--      <el-breadcrumb-item>简介</el-breadcrumb-item>-->
 <!--    </el-breadcrumb>-->
+    <el-page-header @back="goBack" content="课程学习" style="margin-top: 20px; margin-left: 20px">
+    </el-page-header>
     <el-main class="elMain">
       <h1 id="0">基于ARIMA算法的天气预测平台</h1>
 
@@ -314,6 +316,9 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      this.$router.push({name: 'CourseSelect', params: {isReload: 'true'}});
+    },
     handleClick(tab/*,event*/){
       this.jump(tab.index)
     },

@@ -104,15 +104,15 @@
                   </template>
                 </el-menu-item>
 
-                <el-submenu v-if="!isTeacher" index="5">
-                  <template slot="title">
-                    <i class="el-icon-s-custom"></i>
-                    <span>基础知识</span>
-                  </template>
-                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>
-                </el-submenu>
+<!--                <el-submenu v-if="!isTeacher" index="5">-->
+<!--                  <template slot="title">-->
+<!--                    <i class="el-icon-s-custom"></i>-->
+<!--                    <span>基础知识</span>-->
+<!--                  </template>-->
+<!--                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>-->
+<!--                </el-submenu>-->
 
-                <el-menu-item class="submenu" index="/courseStudy">
+                <el-menu-item class="submenu" index="/courseSelect">
                   <template slot="title">
                     <i class="el-icon-edit"></i>
                     <span>课程学习</span>

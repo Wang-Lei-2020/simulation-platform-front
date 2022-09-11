@@ -16,6 +16,7 @@ import TeacherLogin from "@/components/TeacherLogin"
 import CoursePractice from "@/components/CoursePractice";
 import Home from "@/components/Home";
 import View from "@/views/index"
+import CourseSelect from "@/components/CourseSelect";
 
 Vue.use(VueRouter)
 Vue.use(VueCookies)
@@ -101,6 +102,11 @@ const routes = [
         path: "/view",
         name: 'View',
         component: View
+    },
+    {
+        path: "/courseSelect",
+        name: 'CourseSelect',
+        component: CourseSelect
     }
 ];
 
