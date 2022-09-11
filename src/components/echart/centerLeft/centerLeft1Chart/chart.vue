@@ -3,8 +3,8 @@
     <Echart
       :options="options"
       id="centreLeft1Chart"
-      height="300px"
-      width="300px"
+      height="315px"
+      width="390px"
     ></Echart>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
           legend: {
             orient: "horizontal",
             icon: "circle",
-            bottom:20,
+            bottom:0,
             x: "center",
             data: newData.xData,
             textStyle: {
@@ -63,9 +63,9 @@ export default {
             {
               name: "学习占比统计",
               type: "pie",
-              radius: [8, 42],
-              roseType: "area",
-              center: ["50%", "30%"],
+              radius: [0, 100],
+              // roseType: "area",
+              center: ["50%", "40%"],
               data: newData.seriesData,
             }
           ]

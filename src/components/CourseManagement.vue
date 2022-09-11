@@ -131,6 +131,11 @@ export default {
       myCourseList:[]
     }
   },
+   provide(){
+    return{
+      sendCourseId: this
+    }
+  },
   created() {
     if(Vue.$cookies.get("userName") == null ) {
       this.$router.push({name: 'Login', params: {isReload: 'true'}});
@@ -293,10 +298,6 @@ export default {
     handleClose(done) {
       done();
     },
-    transAddExercise:function (e){
-      this.addExerciseFlag = true
-      this.chosenCourseId = e.courseId
-    },
     getMyCourseList: function(){
       const _this = this;
       let formData = new FormData;
@@ -339,7 +340,11 @@ export default {
     enterExercise: function (){
       this.$router.push("/coursePractice")
     },
-
+    transAddExercise:function (e){
+      this.chosenCourseId = e.courseId
+      this.addExerciseFlag = true
+      console.log(e)
+    },
 
   }
 }

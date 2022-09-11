@@ -31,10 +31,7 @@ import Vue from "vue";
 
 export default {
   name: "AddExercise",
-  // props:{
-  //   addExerciseFlag:{},
-  //   chosenCourseId: {},
-  // },
+  inject: ['sendCourseId'],
   data(){
     return{
       ruleForm: {
@@ -49,24 +46,28 @@ export default {
       ImportExercisePath:"http://localhost:8081/exercise/uploadGroup",
       importFileList: new FormData(),
       flag: false,
+      courseId: 0,
   }
   },
   created() {
+    this.courseId = this.sendCourseId.chosenCourseId
+      this.importFileList.append('courseId',this.courseId)
     if(Vue.$cookies.get("userName") == null ) {
       this.$router.push({name: 'Login', params: {isReload: 'true'}});
     }
   },
-  // watch:{
-  //   chosenCourseId:function(newData){
-  //     this.importFileList.append('courseId',newData)
-  //     console.log(newData)
-  //   },
+  watch:{
+    // chosenCourseId:function(newData){
+    //   this.importFileList.append('courseId',newData)
+    //   console.log("courseId传参：",newData)
+    // },
   //   addExerciseFlag:function (newData){
   //     this.iAddExerciseFlag = newData
   //     console.log(this.iAddExerciseFlag)
   //   }
-  // },
+  },
   methods:{
+
     changeFile(file) {
       let extension = file.name.substring(file.name.lastIndexOf('.')+1)
       const isXLS = extension === "xls";
@@ -82,6 +83,7 @@ export default {
         this.$message.error('上传文件大小不能超过 40MB!');
       }
       this.importFileList.append('file',file.raw)
+      this.importFileList.append('groupName',this.ruleForm.groupName)
       console.log("文件流：",this.importFileList.get('file'))
       this.flag = true
       return (isXLS|isXLSX|isCSV) && isLt40M;
@@ -92,7 +94,6 @@ export default {
     },
     addExercise: function(){
       const _this = this;
-
       if(this.flag){
         this.$axios.post("/exercise/uploadGroup",this.importFileList,{
           headers: {
@@ -101,27 +102,26 @@ export default {
           withCredentials: true
         })
         _this.$router.go(0)
-          //   .then(function (response) {
-          // if(response.data.code == "0") {
-          //   // 这里是处理正确的回调
-          //   _this.$message({
-          //     message: '添加成功',
-          //     type: 'success'
-          //   });
-          //   _this.$router.go(0)
-          // }
-          // else{
-        //     _this.$message({
-        //       message: response.data.msg,
-        //       type: 'warning'
-        //     });
-        //   }
-        // })
-      // .catch(function (response) {
-        //   // 这里是处理错误的回调
-        //   // _this.$message.error(response.data.msg)
-        // })
-        // }
+            .then(function (response) {
+          if(response.data.code == "0") {
+            // 这里是处理正确的回调
+            _this.$message({
+              message: '添加成功',
+              type: 'success'
+            });
+            _this.$router.go(0)
+          }
+          else{
+            _this.$message({
+              message: response.data.msg,
+              type: 'warning'
+            });
+          }
+        })
+      .catch(function (response) {
+          // 这里是处理错误的回调
+          _this.$message.error(response.data.msg)
+        })
         }
       },
     Cancel: function(){

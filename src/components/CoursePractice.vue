@@ -1,7 +1,7 @@
 <template>
   <el-row style="display: block;">
     <el-row class="backstyle" >
-      <el-col span="18" style="min-height: 1px;">
+      <el-col :span="18" style="min-height: 1px;">
         <el-container>
 <!--          <el-aside width="200px">-->
 <!--            <el-row style="line-height: 35px;height: 45px;margin-top: 20px;">-->
@@ -31,28 +31,29 @@
                         <el-row style="border-bottom: 1px solid rgb(228,228,228);line-height: 32px;">
                           {{index+1}}. {{item.title}}
                         </el-row>
-                        <el-row style="margin-top: 20px;" v-for="citem in item.result" :key="citem.outcome">
+<!--                        <el-row style="margin-top: 20px;" v-for="citem in item.result" :key="citem.outcome">-->
+                        <el-row style="margin-top: 20px;" v-for="(citem,index) in item.result" :key="index">
                           <a @click="gotobutton(index)">
                             <el-radio v-model="item.radio" :label="citem.outanswer">{{citem.outcome}}</el-radio>
                           </a>
                         </el-row>
 <!--                      </el-col>-->
                     </el-row>
-                    <el-row style="margin-bottom: 20px;left:5%;border-bottom: 1px solid rgb(228,228,228);line-height: 32px;">
+                    <el-row :class="'classabc8'" style="margin-bottom: 20px;left:5%;border-bottom: 1px solid rgb(228,228,228);line-height: 32px;">
                       8. 实验练习：第一个天气预测项目
                       <iframe id = "testMsg" style = "margin-top:20px;width: 870px;height: 645px;" src = 'https://www.thingjs.com/s/776376f0de43375d608eebd2' ></iframe>
                     </el-row>
                     <el-row style="margin-top: 60px;text-align: center;">
-                      <el-col span="12">
+                      <el-col :span="12">
                         <div>
-                          <div class="mask" v-if="showModal" @click="showModal=false"></div>
-                          <div class="pop" v-if="showModal">
-<!--                            <img src="../../assets/img/we.png" style="width: 100%;height:100%;"></img>-->
-                          </div>
-                          <el-button @click="showModal=true" type="primary" round>提交</el-button>
+<!--                          <div class="mask" v-if="showModal" @click="showModal=false"></div>-->
+<!--                          <div class="pop" v-if="showModal">-->
+<!--                            <img src="../assets/气温预测平台/1.png" style="width: 100%;height:100%;">-->
+<!--                          </div>-->
+                          <el-button @click="AfterSubmit()" type="primary" round>提交</el-button>
                         </div>
                       </el-col>
-                      <el-col span="12">
+                      <el-col :span="12">
                         <el-button type="primary" round>取消</el-button>
                       </el-col>
                     </el-row>
@@ -64,7 +65,7 @@
           </el-container>
         </el-container>
       </el-col>
-      <el-col span="6">
+      <el-col :span="6">
         <el-container style="margin-right: 50px;position: fixed;">
           <el-header class="header_style" style="line-height: 40px;height: 40px;">练习</el-header>
           <el-main class="content_style">
@@ -73,8 +74,8 @@
             </el-row>
             <el-row style="margin-top: 10px;">
               <el-button @click="Submit(index+1)" class="button_style" v-for="(item,index) in datalist" :key="index" :style="item.show">{{index+1}}</el-button>
-              <el-button @click="Submit(index+1)" class="button_style">8</el-button>
-<!--              实验题的跳转需要研究一下-->
+              <!--              实验题的跳转-->
+              <el-button @click="Submit(8)" class="button_style">8</el-button>
             </el-row>
           </el-main>
         </el-container>
@@ -90,122 +91,63 @@ export default {
     return {
       showModal: false,
       grades: 0,
-      datalist: [{
-        title: '两位同事从上海出发前往深圳出差，他们在不同时间出发，搭乘的交通工具也不同，能准确描述两者“上海到深圳”距离差别的是：',
-        answer: 'D',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: '欧式距离',
-        }, {
-          outanswer: 'B',
-          outcome: '余弦距离',
-        }, {
-          outanswer: 'C',
-          outcome: '曼哈顿距离',
-        }, {
-          outanswer: 'D',
-          outcome: '切比雪夫距离',
-        }]
-      }, {
-        title: '机器学习训练时，Mini-Batch 的大小优选为2个的幂，如 256 或 512。它背后的原因是什么？',
-        answer: 'B',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: 'Mini-Batch 为偶数的时候，梯度下降算法训练的更快',
-        }, {
-          outanswer: 'B',
-          outcome: 'Mini-Batch 设为2的幂，是为了符合CPU、GPU的内存要求，利于并行化处理',
-        }, {
-          outanswer: 'C',
-          outcome: '不使用偶数时，损失函数是不稳定的',
-        }, {
-          outanswer: 'D',
-          outcome: '以上说法都不对',
-          }]
-
-      },{
-        title: '下列说法错误的是？',
-        answer: 'C',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: '当目标函数是凸函数时，梯度下降算法的解一般就是全局最优解',
-        }, {
-          outanswer: 'B',
-          outcome: '进行 PCA 降维时，需要计算协方差矩阵',
-        },{
-          outanswer: 'C',
-          outcome: '沿负梯度的方向一定是最优的方向',
-        }, {
-          outanswer: 'D',
-          outcome: '利用拉格朗日函数能解带约束的优化问题',
-        }]
-      }, {
-        title: '关于 L1、L2 正则化下列说法正确的是？',
-        answer: 'C',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: ' L2 正则化能防止过拟合，提升模型的泛化能力，但 L1 做不到这点',
-        }, {
-          outanswer: 'B',
-          outcome: 'L2 正则化技术又称为 Lasso Regularization',
-        },{
-          outanswer: 'C',
-          outcome: ' L1 正则化得到的解更加稀疏',
-        }, {
-          outanswer: 'D',
-          outcome: 'L2 正则化得到的解更加稀疏',
-        }]
-      },{
-        title: '“增加卷积核的尺寸，一定能提高卷积神经网络的性能。” 这句话是否正确？',
-        answer: 'B',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: '正确',
-        }, {
-          outanswer: 'B',
-          outcome: '错误',
-        }]
-      },{
-        title: '有N个样本，一般用于训练，一般用于测试。若增大N值，则训练误差和测试误差之间的差距会如何变化？',
-        answer: 'B',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: '增大',
-        }, {
-          outanswer: 'B',
-          outcome: '减小',
-        }]
-      }, {
-        title: '在回归模型中，下列哪一项在权衡欠拟合（under-fitting）和过拟合（over-fitting）中影响最大？',
-        answer: 'A',
-        radio: '',
-        show: '',
-        result: [{
-          outanswer: 'A',
-          outcome: '多项式阶数',
-        }, {
-          outanswer: 'B',
-          outcome: '更新权重w时，使用的是矩阵求逆还是梯度下降',
-        }, {
-          outanswer: 'C',
-          outcome: '使用常数项',
-        }]
-      }],
+      datalist: [],
     };
   },
+  created() {
+    const __this = this
+    this.getExerciseList(__this,10,"练习题组一")
+  },
   methods: {
+    getExerciseList: function(__this,courseId,groupName){
+      const _this = __this;
+      this.$axios.post('/exercise/getAllExercise', {"courseId":courseId,"groupName":groupName}, {
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        withCredentials: true
+      }).then(function (response) {
+        if(response.data.code === '0') {
+          // 这里是处理正确的回调
+          let dataset = response.data.data
+          console.log("dataset",dataset)
+          for(let e of dataset){
+            let resultList = [{
+                  outanswer: 'A',
+                  outcome: e['sectionA'],
+                },
+                  {
+                    outanswer: 'B',
+                    outcome: e['sectionB'],
+                  },
+                ]
+            if(e['sectionC'] != null && e['sectionC'] != '') {
+              resultList.push({outanswer: 'C', outcome: e['sectionC']})
+            }
+            if(e['sectionD'] != null && e['sectionD'] != '') {
+              resultList.push({outanswer: 'D', outcome: e['sectionD']})
+            }
+            let res = {
+              title: e['exerciseName'],
+              answer: e['rightAnswer'],
+              radio: '',
+              show: '',
+              result: resultList,
+              }
+            _this.datalist.push(res)
+          }
+          console.log("datalist",_this.datalist)
+        }else{
+          _this.$message({
+            message: response.data.msg,
+            type: 'warning'
+          });
+        }
+      }).catch(function (response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      })
+    },
     Submit(i) {
       var wei = "classabc" + i
       var el = document.getElementsByClassName(wei)[0];
@@ -228,6 +170,16 @@ export default {
     },
     gotobutton(index) {
       this.$data.datalist[index].show = 'background: #00ABEA;';
+    },
+    AfterSubmit(){
+      this.showModal=true
+      this.$message({
+        message:'提交成功',
+        type:'success'
+      })
+      setTimeout(()=>{
+        this.$router.push({name: 'UserList', params: {isReload: 'true'}});
+      },500)
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 5%; margin-right: 5%; margin-top: 2%">
+  <div style="margin-left: 3%; margin-right: 5%; margin-top: 2%">
     <el-popover
         placement="bottom-start"
         width="1150"
