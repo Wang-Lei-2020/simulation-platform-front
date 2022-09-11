@@ -298,10 +298,6 @@ export default {
     handleClose(done) {
       done();
     },
-    transAddExercise:function (e){
-      this.addExerciseFlag = true
-      this.chosenCourseId = e.courseId
-    },
     getMyCourseList: function(){
       const _this = this;
       let formData = new FormData;
