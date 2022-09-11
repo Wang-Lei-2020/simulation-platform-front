@@ -164,6 +164,7 @@
         </el-row>
       </div>
     </el-popover>
+
     <el-tabs v-model="activeName" type="card" >
       <el-tab-pane label="基础知识" name="first">
         <el-row :gutter="20">
@@ -180,28 +181,24 @@
         <el-row :gutter="20">
           <el-col :span="8"><div class="grid-content">
             <img style="height: 180px; width: 280px; margin-top: 8%; margin-left: 12%; cursor:pointer;" src="../assets/default_course_img.jpg" alt="logo" @click="toCourse" >
-            <el-link style="margin-top: 5%; margin-left: 12%; text-decoration-line: underline; font-weight: bold; font-size: large " @click="toCourse">计算机网络</el-link>
-            <p style="margin-top: 5%; margin-left: 12%;font-size: small"> 课程编码：M200888 </p>
-          </div></el-col>
-          <el-col :span="8"><div class="grid-content">
-            <img style="height: 180px; width: 280px; margin-top: 8%; margin-left: 12%; cursor:pointer;" src="../assets/default_course_img.jpg" alt="logo" @click="toCourse" >
             <el-link style="margin-top: 5%; margin-left: 12%; text-decoration-line: underline; font-weight: bold; font-size: large " @click="toCourse">大数据概论</el-link>
             <p style="margin-top: 5%; margin-left: 12%;font-size: small"> 课程编码：M200866 </p>
-          </div></el-col>
+          </div>
+          </el-col>
           <el-col :span="8"><div class="grid-content">
             <img style="height: 180px; width: 280px; margin-top: 8%; margin-left: 12%; cursor:pointer;" src="../assets/default_course_img.jpg" alt="logo" @click="toCourse" >
             <el-link style="margin-top: 5%; margin-left: 12%; text-decoration-line: underline; font-weight: bold; font-size: large " @click="toCourse">软件体系结构</el-link>
             <p style="margin-top: 5%; margin-left: 12%;font-size: small"> 课程编码：M200879 </p>
-          </div></el-col>
-        </el-row>
-        <el-divider></el-divider>
-        <el-row :gutter="20">
-        <el-col :span="8"><div class="grid-content">
+          </div>
+          </el-col>
+          <el-col :span="8"><div class="grid-content">
             <img style="height: 180px; width: 280px; margin-top: 8%; margin-left: 12%; cursor:pointer;" src="../assets/default_course_img.jpg" alt="logo" @click="toCourse" >
             <el-link style="margin-top: 5%; margin-left: 12%; text-decoration-line: underline; font-weight: bold; font-size: large " @click="toCourse">软件项目管理</el-link>
             <p style="margin-top: 5%; margin-left: 12%;font-size: small"> 课程编码：M200804 </p>
-          </div></el-col>
+          </div>
+          </el-col>
         </el-row>
+        <el-divider></el-divider>
 
       </el-tab-pane>
       <el-tab-pane label="仿真实验" name="third">
