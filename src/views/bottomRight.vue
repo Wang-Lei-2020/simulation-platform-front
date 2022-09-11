@@ -6,7 +6,7 @@
           <icon name="chart-area" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">工单修复以及满意度统计图</span>
+          <span class="fs-xl text mx-2" style="font-size: 18px">本周学习情况统计图</span>
           <div class="decoration2">
             <dv-decoration-2 :reverse="true" style="width:5px;height:6rem;" />
           </div>

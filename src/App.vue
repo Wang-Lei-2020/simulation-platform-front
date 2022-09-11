@@ -154,7 +154,7 @@
 
       <el-footer class="footer">
         <el-backtop></el-backtop>
-        <div style="text-align: center;color:#5a5959;margin-top: 35px">版权所有© WangLei</div>
+        <div style="text-align: center;color:#5a5959;margin-top: 35px">版权所有© </div>
       </el-footer>
     </el-container>
   </div>

@@ -10,14 +10,14 @@ export default {
   data () {
     return {
       cdata: {
-        xData: ["data1", "data2", "data3", "data4", "data5", "data6"],
+        xData: ["全景浏览", "基础知识", "仿真实验", "网站开发", "实验练习", "实验考核"],
         seriesData: [
-          { value: 10, name: "data1" },
-          { value: 5, name: "data2" },
-          { value: 15, name: "data3" },
-          { value: 25, name: "data4" },
-          { value: 20, name: "data5" },
-          { value: 35, name: "data6" }
+          { value: 10, name: "全景浏览" },
+          { value: 20, name: "基础知识" },
+          { value: 15, name: "仿真实验" },
+          { value: 20, name: "网站开发" },
+          { value: 20, name: "实验练习" },
+          { value: 12, name: "实验考核" }
         ]
       }
     }

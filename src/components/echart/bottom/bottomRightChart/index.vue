@@ -55,27 +55,27 @@ export default {
 
         // 折线图数据
         this.cdata.weekMaxData.push(this.cdata.maxData);
-        let hour = (Math.random() * 6).toFixed(2);
+        let hour = (Math.random() * 6).toFixed(2);//学习时长
         this.cdata.weekLineData.push(hour);
 
         // 雷达图数据
         // 我的指标
-        let project = Math.round(Math.random() * 3);
-        let efficiency = Math.random().toFixed(2);
-        let times = Math.round(Math.random()*5);
-        let radarDayData = [hour, project, efficiency, times];
+        let times = Math.round(Math.random() * 3 + 0.5);//登录次数
+        let efficiency = Math.random().toFixed(2);//学习效率
+        let project = Math.round(Math.random()*5 + 0.5); //完成项目
+        let radarDayData = [hour, times, efficiency, project];
         this.cdata.radarData.unshift(radarDayData);
 
         // 平均指标
-        let hourAvg = (Math.random() * 6).toFixed(2);
-        let projectAvg = (Math.random() * 3).toFixed(2);
-        let efficiencyAvg = Math.random().toFixed(2);
-        let timesAvg =(Math.random()*5).toFixed(2);
+        let hourAvg = (Math.random() * 6).toFixed(2);//平均时长
+        let timesAvg = (Math.random() * 3 + 0.5).toFixed(2);//平均次数
+        let efficiencyAvg = Math.random().toFixed(2);//平均效率
+        let projectAvg =(Math.random()*5 + 0.5).toFixed(2);//平均完成项目
         let radarDayDataAvg = [
           hourAvg,
-          projectAvg,
+          timesAvg,
           efficiencyAvg,
-          timesAvg
+          projectAvg
         ];
         this.cdata.radarDataAvg.unshift(radarDayDataAvg);
       }
