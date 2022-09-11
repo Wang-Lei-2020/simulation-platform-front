@@ -73,7 +73,7 @@ export default {
     }
 
     if(Vue.$cookies.get("userName") !== null && Vue.$cookies.get("role") === "teacher") {
-      this.$router.push({name: 'View', params: {isReload: 'true'}});
+      this.$router.push({name: 'Home', params: {isReload: 'true'}});
     }
 
     if (this.$route.params.isReload === 'true') {
@@ -114,7 +114,7 @@ export default {
 
           let flag = true;
           _this.$store.commit('login', flag);
-          _this.$router.push({name: 'View', params: {isReload: 'true'}});
+          _this.$router.push({name: 'Home', params: {isReload: 'true'}});
         }else{
           _this.$message.error(response.data.msg);
         }

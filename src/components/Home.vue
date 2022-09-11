@@ -1,7 +1,7 @@
 <template>
-<div>
-  <Index></Index>
-</div>
+  <div style="position: absolute; left: 635px; top: 273px">
+    <Index></Index>
+  </div>
 </template>
 
 <script>

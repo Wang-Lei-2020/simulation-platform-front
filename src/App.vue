@@ -266,8 +266,8 @@ export default {
       }
     },
     toHome: function () {
-      if (this.$route.path !== "/view") {
-        this.$router.push({name:"View",params:{isReload: 'true'}});
+      if (this.$route.path !== "/home") {
+        this.$router.push({name:"Home",params:{isReload: 'true'}});
       }
     },
     ChangePhoto: function(){
