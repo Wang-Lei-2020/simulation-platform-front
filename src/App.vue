@@ -97,7 +97,7 @@
                   @open="handleOpen"
                   @close="handleClose"
               >
-                <el-menu-item class="submenu" index="/sceneView">
+                <el-menu-item v-if="!isTeacher" class="submenu" index="/sceneView">
                   <template slot="title">
                     <i class="el-icon-location-outline"></i>
                     <span>全景浏览</span>
@@ -112,7 +112,7 @@
 <!--                  <el-menu-item class="submenu" index="/experiment">传感器安放</el-menu-item>-->
 <!--                </el-submenu>-->
 
-                <el-menu-item class="submenu" index="/courseSelect">
+                <el-menu-item v-if="!isTeacher" class="submenu" index="/courseSelect">
                   <template slot="title">
                     <i class="el-icon-edit"></i>
                     <span>课程学习</span>

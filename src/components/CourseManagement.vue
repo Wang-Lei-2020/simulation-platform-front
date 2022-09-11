@@ -23,28 +23,28 @@
       <AddExercise></AddExercise>
     </el-dialog>
 
-    <h1 style="margin-left: 6px">我的课程</h1>
+<!--    <h1 style="margin-left: 6px">我的课程</h1>-->
 
-    <div class="courseList" style="margin-top: 20px">
-      <el-table :data="myCourseList" border>
-        <el-table-column label="课程编号" align="center" prop="courseId" width="80px" />
-        <el-table-column label="课程名" align="center" prop="courseName" fixed-width />
-        <el-table-column label="课程介绍" align="center" prop="introduction" fixed-width />
-        <el-table-column label="授课教师" align="center" prop="courseTeacher" width="90px" />
-        <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />
-        <el-table-column label="课容量" align="center" prop="capacity" width="90px" />
+<!--    <div class="courseList" style="margin-top: 20px">-->
+<!--      <el-table :data="myCourseList" border>-->
+<!--        <el-table-column label="课程编号" align="center" prop="courseId" width="80px" />-->
+<!--        <el-table-column label="课程名" align="center" prop="courseName" fixed-width />-->
+<!--        <el-table-column label="课程介绍" align="center" prop="introduction" fixed-width />-->
+<!--        <el-table-column label="授课教师" align="center" prop="courseTeacher" width="90px" />-->
+<!--        <el-table-column label="学分" align="center" prop="courseCredit" width="70px" />-->
+<!--        <el-table-column label="课容量" align="center" prop="capacity" width="90px" />-->
 
-        <el-table-column label="操作" align="center" width="195" class-name="small-padding fixed-width">
-          <template slot-scope="scope">
-            <el-button size="mini" type="text" icon="el-icon-tickets" @click="enterExercise()">练习</el-button>
-            <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse()">进入课程</el-button>
-            <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+<!--        <el-table-column label="操作" align="center" width="195" class-name="small-padding fixed-width">-->
+<!--          <template slot-scope="scope">-->
+<!--            <el-button size="mini" type="text" icon="el-icon-tickets" @click="enterExercise()">练习</el-button>-->
+<!--            <el-button size="mini" type="text" icon="el-icon-success" @click="selectCourse()">进入课程</el-button>-->
+<!--            <el-button size="mini" type="text" icon="el-icon-delete-solid" @click="deletePickCourse(scope.row)">退课</el-button>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+<!--      </el-table>-->
+<!--    </div>-->
 
-    <h1 style="margin-left: 6px; margin-top: 40px; margin-bottom: 5px">选课系统</h1>
+<!--    <h1 style="margin-left: 6px; margin-top: 40px; margin-bottom: 5px">选课系统</h1>-->
 
     <div>
       <div class="search bar7" style="float: left">
