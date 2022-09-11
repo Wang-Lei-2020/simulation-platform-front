@@ -18,10 +18,10 @@
           </el-col>
           <el-col :span="5" style="min-height: 100%" >
             <el-col :span="3" style="min-height: 100%; min-width: 60px">
-              <img style="height: 56px;margin-right: 8%" src="./assets/1.png" alt="logo" @click="toHome">
+              <img style="height: 56px;margin-right: 8%; cursor:pointer;" src="./assets/1.png" alt="logo" @click="toHome" >
             </el-col>
             <el-col :span="15" style="min-height: 100%">
-              <div style="color: gold; margin-top: 17px">
+              <div style="color: gold; margin-top: 17px; cursor:pointer;"  @click="toHome">
                 川藏铁路虚拟仿真教学系统
               </div>
             </el-col>
@@ -127,12 +127,12 @@
                   <el-menu-item class="submenu" index="/courseManagement">课程管理</el-menu-item>
                 </el-submenu>
 
-                <el-menu-item class="submenu" index="/courseManagement">
-                  <template slot="title">
-                    <i class="el-icon-s-data"></i>
-                    <span>课程选课</span>
-                  </template>
-                </el-menu-item>
+<!--                <el-menu-item class="submenu" index="/courseManagement">-->
+<!--                  <template slot="title">-->
+<!--                    <i class="el-icon-s-data"></i>-->
+<!--                    <span>课程选课</span>-->
+<!--                  </template>-->
+<!--                </el-menu-item>-->
 
                 <el-submenu index="7">
                   <template slot="title">
