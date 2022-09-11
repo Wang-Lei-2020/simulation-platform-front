@@ -1,12 +1,13 @@
 <template>
   <div id="center">
+
     <div class="up">
       <div
         class="bg-color-black item"
         v-for="item in titleItem"
         :key="item.title"
       >
-        <p class="ml-3 colorBlue fw-b fs-xl">{{ item.title }}</p>
+        <p class="ml-3 colorBlue fw-b fs-xl" style="font-size: 15px">{{ item.title }}</p>
         <div>
           <dv-digital-flop
             class="dv-dig-flop ml-1 mt-2 pl-3"
@@ -15,6 +16,7 @@
         </div>
       </div>
     </div>
+
     <div class="down">
       <div class="ranking bg-color-black">
         <span>
@@ -56,10 +58,10 @@ export default {
     return {
       titleItem: [
         {
-          title: '今年累计任务建次数',
+          title: '今年累计登录次数',
           number: {
             number: [120],
-            toFixed: 1,
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -68,10 +70,10 @@ export default {
           }
         },
         {
-          title: '本月累计任务次数',
+          title: '本月累计登录次数',
           number: {
             number: [18],
-            toFixed: 1,
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -80,10 +82,10 @@ export default {
           }
         },
         {
-          title: '今日累计任务次数',
+          title: '今日累计登录次数',
           number: {
             number: [2],
-            toFixed: 1,
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -92,10 +94,10 @@ export default {
           }
         },
         {
-          title: '今年失败任务次数',
+          title: '今年已选课程数',
           number: {
-            number: [14],
-            toFixed: 1,
+            number: [20],
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -104,10 +106,10 @@ export default {
           }
         },
         {
-          title: '今年成功任务次数',
+          title: '今年已完成课程数',
           number: {
-            number: [106],
-            toFixed: 1,
+            number: [16],
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -116,10 +118,10 @@ export default {
           }
         },
         {
-          title: '今年达标任务个数',
+          title: '今年已完成实验数',
           number: {
-            number: [100],
-            toFixed: 1,
+            number: [25],
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {

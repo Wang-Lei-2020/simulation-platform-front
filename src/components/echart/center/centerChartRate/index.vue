@@ -59,7 +59,7 @@ export default {
             y: "center",
             textStyle: {
               color: this.colorObj.textStyle,
-              fontSize: 16
+              fontSize: 20
             }
           },
           series: [
