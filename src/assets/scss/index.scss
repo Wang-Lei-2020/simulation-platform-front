@@ -2,11 +2,7 @@
   color: #d3d6dd;
   width: 1920px;
   height: 1080px;
-  position: relative;
-  //top: -25%;
-  //left: -25%;
-  //transform: translate(50%, 50%);
-  transform-origin: center;
+  position: absolute;
   overflow: hidden;
 
   .bg {

@@ -1,5 +1,4 @@
 <template>
-<!--  <div style="position: relative; left: 0px; top: 0px;">-->
   <div>
     <Index></Index>
   </div>

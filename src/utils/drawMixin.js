@@ -36,14 +36,16 @@ export default {
       if (appRef) {
         if (currentRate > baseProportion) {
           // 表示更宽
-          scale.width = ((window.innerHeight * baseProportion) / baseWidth).toFixed(5)
-          scale.height = (window.innerHeight / baseHeight).toFixed(5)
-          appRef.style.transform = `scale(${scale.width}, ${scale.height}) translate(-50%, -50%)`
+          scale.width = ((window.innerWidth) / baseWidth*5/6).toFixed(5)
+          scale.height = (scale.width/1.09).toFixed(5)
+          appRef.style.transform = `scale(${scale.width}, ${scale.height}) translate(0%, 0%)`
+          appRef.style.transformOrigin='0% 0%'
         } else {
           // 表示更高
-          scale.height = ((window.innerWidth / baseProportion) / baseHeight).toFixed(5)
-          scale.width = (window.innerWidth / baseWidth).toFixed(5)
-          appRef.style.transform = `scale(${scale.width}, ${scale.height}) translate(-50%, -50%)`
+          scale.width = ((window.innerWidth) / baseWidth*5/6).toFixed(5)
+          scale.height = (scale.width/1.09).toFixed(5)
+          appRef.style.transform = `scale(${scale.width}, ${scale.height}) translate(0%, 0%)`
+          appRef.style.transformOrigin='0% 0%'
         }
       }
     },
