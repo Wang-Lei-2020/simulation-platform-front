@@ -4,7 +4,7 @@
       <el-container>
         <el-aside width="30%"></el-aside>
         <el-main class="login-main"
-                 style="margin-top:100px;width: 200%;height: 80%;vertical-align: center">
+                 style="margin-top:8%;margin-bottom:14%;width: 200%;height: 80%;vertical-align: center">
           <h1 style="color: #409EFF;text-align: center">登录</h1>
           <el-form ref="loginForm" :rules="rules" :model="loginForm" label-width="20%">
             <el-form-item label="用户名" prop="userName" required>
@@ -177,6 +177,15 @@ export default {
 .login-main {
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+  background: rgba(255,255,255,0.9);
+}
+.login_form{
+  width: 100%;
+  height: 100%;
+  /*padding: 16px 16px 0 16px;*/
+  background-image: url("../assets/loginBg.jpg");
+  background-size: cover;
+  background-position: center center;
 }
 
 .clearBox {
