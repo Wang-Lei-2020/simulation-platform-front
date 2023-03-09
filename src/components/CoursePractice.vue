@@ -41,7 +41,7 @@
                     </el-row>
                     <el-row :class="'classabc8'" style="margin-bottom: 20px;left:5%;border-bottom: 1px solid rgb(228,228,228);line-height: 32px;">
                       8. 实验练习：第一个天气预测项目
-                      <iframe id = "testMsg" style = "margin-top:20px;width: 870px;height: 645px;" src = 'https://www.thingjs.com/s/776376f0de43375d608eebd2' ></iframe>
+                      <iframe id = "testMsg" style = "margin-top:20px;width: 870px;height: 645px;" src = 'https://www.thingjs.com/pp/e7524801afe1e1271b939375' ></iframe>
                     </el-row>
                     <el-row style="margin-top: 60px;text-align: center;">
                       <el-col :span="12">
@@ -178,7 +178,7 @@ export default {
         type:'success'
       })
       setTimeout(()=>{
-        this.$router.push({name: 'UserList', params: {isReload: 'true'}});
+        this.$router.push({name: 'CourseSelect', params: {isReload: 'true'}});
       },500)
     }
   }
